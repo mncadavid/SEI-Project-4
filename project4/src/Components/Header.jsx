@@ -1,12 +1,14 @@
 import React from 'react';
+import {Button} from 'antd';
 
 function Header(){
     return(
-        <header>
+        <header className="header">
+            <img className="logo" src="./food-clipart.png" alt="Logo"/>
             <h1>Food Folio</h1>
-            <div>
+            <div className="auth-header">
                 <a href="#">My Account</a>
-                <a href="#">Log Out</a>
+                <Button type="primary" >Log Out</Button>
             </div>
         </header>
     )
