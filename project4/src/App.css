@@ -30,3 +30,19 @@
     justify-content: center;
     align-items: center;
 }
+
+.splash-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    flex-direction: column;
+}
+.splash-image{
+    height: 30%;
+    width: 30%;
+    margin: 10px auto;
+}
+.auth-button{
+    margin: 5px;
+}
