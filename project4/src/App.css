@@ -106,3 +106,23 @@
     padding: 5px 10px;
     width: 20%;
 }
+.list-config-pane{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: #FF9B85;
+    border: solid #EE6055;
+    border-radius: 10px;
+    margin: 20px auto;
+    padding: 5px 10px;
+}
+.lists-container{
+    background-color: white;
+    border-radius: 10px;
+    overflow: scroll;
+    height: 80px;
+}
+.list-title-tag{
+    border: solid black;
+    text-align: center;
+}

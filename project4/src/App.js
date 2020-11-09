@@ -5,6 +5,7 @@ import SplashPage from './Components/SplashPage';
 import CardContainer from './Components/CardContainer';
 import FoodModal from './Components/FoodModal';
 import AddFood from './Components/AddFood';
+import ListPage from './Components/ListPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       {/* <SplashPage /> */}
       {/* <CardContainer />
       <FoodModal /> */}
+      <ListPage />
       <AddFood />
       <Footer />
     </div>
