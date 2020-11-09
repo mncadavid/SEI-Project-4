@@ -3,6 +3,7 @@ import Footer from './Components/Footer';
 import Header from './Components/Header';
 import SplashPage from './Components/SplashPage';
 import CardContainer from './Components/CardContainer';
+import ExposuresContainer from './Components/ExposuresContainer';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header />
       {/* <SplashPage /> */}
       <CardContainer />
+      <ExposuresContainer />
       <Footer />
     </div>
   );

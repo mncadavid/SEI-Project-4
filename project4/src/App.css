@@ -57,5 +57,18 @@
     border: solid #60D394;
     border-radius: 10px;
     margin: 20px;
+}
 
+.exposures-container{
+    overflow: scroll;
+    height: 350px;
+}
+.single-exposure{
+    background-color: #FF9B85;
+    border: solid #EE6055;
+    border-radius: 10px;
+    margin: 20px;
+    width: 40%;
+    padding: 5px 10px;
+    height: 150px;
 }
