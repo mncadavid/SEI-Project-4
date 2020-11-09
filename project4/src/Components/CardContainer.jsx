@@ -6,6 +6,7 @@ function CardContainer(){
     return(
         <div className="card-container">
             <FoodCard />
+            <FoodCard />
         </div>
     )
 }

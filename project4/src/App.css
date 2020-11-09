@@ -126,3 +126,43 @@
     border: solid black;
     text-align: center;
 }
+.list-page{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.list-food-card{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    background-color: #AAF683;
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+    border: solid #60D394;
+    border-radius: 10px;
+    margin: 20px;
+}
+.list{
+    border: solid black;
+    width: 50%;
+    margin: 10px;
+}
+
+.filter-pane{
+    border: solid black;
+    width: 20%;
+}
+
+.browse-page{
+    display: flex;
+    flex-direction: column;
+}
+.browse-lower{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+.search{
+    margin: 10px auto;
+}
