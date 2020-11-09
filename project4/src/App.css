@@ -129,7 +129,8 @@
 .list-page{
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 100vw;
+    height: 80vh;
 }
 .list-food-card{
     display: flex;
@@ -157,6 +158,8 @@
 .browse-page{
     display: flex;
     flex-direction: column;
+    height: 80vh;
+    width: 100vw;
 }
 .browse-lower{
     display: flex;
@@ -165,4 +168,9 @@
 }
 .search{
     margin: 10px auto;
+}
+.account-page{
+    width: 100vw;
+    height: 75vh;
+    text-align: center;
 }
