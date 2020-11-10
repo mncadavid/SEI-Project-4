@@ -7,8 +7,18 @@ const index = (req, res) => {
     })
 }
 
+const addFood = (req, res) => {
+    Food.create(req.body)
+    .then(newFood => {
+        Food.findAll()
+        .then(food => {
+            res.status(200).json(food);
+        })
+    })
+}
 
 
 module.exports = {
-    index
+    index,
+    addFood
 }
