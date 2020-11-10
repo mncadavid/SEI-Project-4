@@ -6,7 +6,11 @@ const routes = require('./routes');
 const app = express();
 
 const verifyToken = (req,res,next) => {
-    let token = req.cookies.jwt;
+    let token = req.headers['authorization'];
+
+    if(token){
+        token = token.substring(7)
+    }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
         if(err || !decodedUser){
@@ -23,6 +27,7 @@ const verifyToken = (req,res,next) => {
 app.use('/users', routes.users);
 app.use('/lists', routes.lists);
 app.use('/auth', routes.auth);
+app.use('/auth/verify', verifyToken, routes.auth);
 
 app.get('/', (req,res) => {
     res.send('Splash page')
