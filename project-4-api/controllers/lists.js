@@ -3,7 +3,22 @@ const Food = require('../models').Food;
 const GroceryLists = require('../models').GroceryLists;
 
 const index = (req, res) => {
-    res.send('API is working properly');
+    User.findByPk(req.user.id, {
+        include: [
+            {
+                model: GroceryLists,
+                attributes: ['id', 'name', 'notes'],
+                include: [{
+                    model: Food,
+                    attributes: ['name', 'category']
+                }]
+            }
+        ],
+        attributes: ['username', 'childId']
+    })
+    .then(foundUser => {
+        res.send(foundUser);
+    })
 };
 
 const show = (req, res) => {

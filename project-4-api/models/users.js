@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Users.hasMany(models.Child, {foreignKey: "id"});
-      Users.hasMany(models.GroceryLists, {foreignKey: "id"});
+      Users.hasMany(models.GroceryList, {foreignKey: "id"});
     }
   };
   Users.init({
