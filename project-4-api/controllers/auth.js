@@ -79,7 +79,20 @@ const login = (req,res) => {
     )
 }
 
+const verifyUser = (req, res) => {
+    User.findByPk(req.user.id, {
+        attributes: ['id', 'username','name','childId']
+    })
+    .then(foundUser => {
+        res.status(200).json(foundUser);
+    })
+    .catch(err => {
+        res.status(500).send(`Error: ${err}`);
+    })
+}
+
 module.exports = {
     signup,
-    login
+    login,
+    verifyUser
 }
