@@ -1,46 +1,41 @@
-import React from 'react';
-import {Button, Input, Menu, Dropdown} from 'antd';
-import {DownOutlined} from '@ant-design/icons'
+import React, {Component} from 'react';
+import {Button, Input} from 'antd';
 
-const menu = (
-    <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-          Fruit
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-          Vegetable
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-          Meat
-        </a>
-      </Menu.Item>
-      <Menu.Item danger>a danger item</Menu.Item>
-    </Menu>
-  );
 
-function AddFood(){
-    return(
-        <div className="add-food">
-            <form>
-                <h3>Add a Food</h3>
-                <p>Name:</p>
-                <Input />
-                <p>Category:</p>
-                <Dropdown overlay={menu}>
-                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    Choose Category <DownOutlined />
-                    </a>
-                </Dropdown>
-                <br />
-                <Button>Add Food</Button>
-            </form>
-        </div>
-    )
+class AddFood extends Component{
+    constructor(props){
+      super(props);
+      this.state ={
+        name: '',
+        category: ''
+      }
+    }
+
+    handleChange = (e) => {
+      const {name, value}= e.target;
+      this.setState({
+        [name]: value
+      })
+    }
+    render(){
+      return(
+          <div className="add-food">
+              <form onSubmit={(e) => this.props.handleAddFood(e,this.state)}>
+                  <h3>Add a Food</h3>
+                  <p>Name:</p>
+                  <Input name="name" onChange={(e) => this.handleChange(e)}/>
+                  <p>Category:</p>
+                  <select name="category" onChange = {(e) => this.handleChange(e)}>
+                      <option value="Fruit">Fruit</option>
+                      <option value="Vegetable">Vegetable</option>
+                      <option value="Meat">Meat</option>
+                  </select>
+                  <br />
+                  <button type="submit">Add Food</button>
+              </form>
+          </div>
+      )
+    }
 }
 
 export default AddFood;

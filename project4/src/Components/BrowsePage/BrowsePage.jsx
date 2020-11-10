@@ -3,7 +3,7 @@ import {Input, Button} from 'antd';
 import CardContainer from './CardContainer';
 import AddFood from './AddFood';
 import FilterPane from './FilterPane';
-import {getAllFood} from '../../services/api_helper';
+import {getAllFood, addFood} from '../../services/api_helper';
 
 class BrowsePage extends Component{
     constructor(props){
@@ -16,12 +16,23 @@ class BrowsePage extends Component{
 
     callGetAllFood = async () => {
         const foods = await getAllFood();
-        console.log(`Foods ${foods}`);
         if(foods){
             this.setState({
                 foods: foods.data
             })
         }
+    }
+
+    handleAddFood = async (e,newFood) => {
+        e.preventDefault();
+        const allFoodsPlusNew = await addFood(newFood);
+        console.log(`Response: ${allFoodsPlusNew}`);
+        if(allFoodsPlusNew){
+            this.setState({
+                foods: allFoodsPlusNew.data
+            })
+        }
+
     }
 
     componentDidMount(){
@@ -38,7 +49,7 @@ class BrowsePage extends Component{
                 <div className="browse-lower">
                     <FilterPane />
                     <CardContainer foods={this.state.foods}/>
-                    <AddFood />
+                    <AddFood handleAddFood={this.handleAddFood}/>
                 </div>
             </div>
         )

@@ -33,3 +33,9 @@ export const getAllFood = async () => {
     const resp = await api.get('/browse');
     return resp;
 }
+
+export const addFood = async (newFood) => {
+    console.log("adding food");
+    const resp = await api.post('/browse/addfood', newFood);
+    return resp;
+}
