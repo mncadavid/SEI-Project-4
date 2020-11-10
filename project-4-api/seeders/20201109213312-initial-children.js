@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('Children', [
       {
         name: 'Luke',
-        age: 1
+        age: 0.5
       },
       {
         name: "Milo",

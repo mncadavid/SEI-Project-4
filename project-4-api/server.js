@@ -3,6 +3,7 @@ const routes = require('./routes');
 const app = express();
 
 app.use('/users', routes.users);
+app.use('/lists', routes.lists);
 
 app.get('/', (req,res) => {
     res.send('Splash page')

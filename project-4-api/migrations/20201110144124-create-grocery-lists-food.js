@@ -1,19 +1,20 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Children', {
+    await queryInterface.createTable('GroceryListsFoods', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING, 
+      listId: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      age: {
-        type: Sequelize.REAL
+      foodId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -25,9 +26,16 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: new Date()
       }
+    },
+    {
+      uniqueKeys: {
+        actions_unique: {
+          fields: ['listId', 'foodId']
+        }
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Children');
+    await queryInterface.dropTable('GroceryListsFoods');
   }
 };

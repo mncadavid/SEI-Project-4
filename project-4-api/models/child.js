@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Child.belongsTo(models.Users, { foreignKey: "id"});
+      Child.hasMany(models.Exposure, { foreignKey: "id"});
     }
   };
   Child.init({
     name: DataTypes.STRING,
-    age: DataTypes.INTEGER
+    age: DataTypes.REAL
   }, {
     sequelize,
     modelName: 'Child',
