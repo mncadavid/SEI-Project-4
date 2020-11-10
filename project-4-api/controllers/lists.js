@@ -1,12 +1,12 @@
 const User = require('../models').Users;
 const Food = require('../models').Food;
-const GroceryLists = require('../models').GroceryLists;
+const GroceryList = require('../models').GroceryList;
 
 const index = (req, res) => {
     User.findByPk(req.user.id, {
         include: [
             {
-                model: GroceryLists,
+                model: GroceryList,
                 attributes: ['id', 'name', 'notes'],
                 include: [{
                     model: Food,
