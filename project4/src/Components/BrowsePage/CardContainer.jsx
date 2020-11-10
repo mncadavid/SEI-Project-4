@@ -1,12 +1,12 @@
-import { Card } from 'antd';
 import React from 'react';
 import FoodCard from './FoodCard';
 
-function CardContainer(){
+function CardContainer(props){
     return(
         <div className="card-container">
-            <FoodCard />
-            <FoodCard />
+            {props.foods && props.foods.map(food => {
+               return <FoodCard food={food}/>
+            })}
         </div>
     )
 }

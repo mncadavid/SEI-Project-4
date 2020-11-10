@@ -27,3 +27,9 @@ export const verifyUser = async () => {
     }
     return false;
 }
+
+export const getAllFood = async () => {
+    console.log("getting food")
+    const resp = await api.get('/browse');
+    return resp;
+}

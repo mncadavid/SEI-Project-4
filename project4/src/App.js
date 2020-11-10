@@ -8,6 +8,8 @@ import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
 import { loginUser, registerUser, verifyUser } from './services/api_helper';
 import { Component } from 'react';
+import {Route} from 'react-router-dom';
+
 
 class App extends Component {
   constructor(props){
@@ -26,6 +28,7 @@ class App extends Component {
     this.setState({
       currentUser
     })
+
   }
   handleLogin = async (e,loginData) => {
     e.preventDefault();
@@ -56,15 +59,28 @@ class App extends Component {
     return (
       <div className="App body">
         {/* <Header /> */}
-        <SplashPage 
+        <Route
+          exact path="/"
+          render={routerProps => <SplashPage 
           handleLogin={this.handleLogin}
           handleVerify={this.handleVerify}
-          handleSignUp={this.handleSignUp}/>
+          handleSignUp={this.handleSignUp}
+          {...routerProps}/>}
+        />
         {/* <FoodModal />  */}
-        {/* <ListPage /> */}
-        {/* <BrowsePage /> */}
-        {/* <AccountPage />
-        <Footer /> */}
+        <Route
+          path="/lists"
+          render={routerProps => <ListPage {...routerProps}/>} 
+        />
+        <Route 
+          path="/browse"
+          render={routerProps => <BrowsePage {...routerProps}/>} 
+        />
+        <Route
+          path="/account"
+          render={routerProps => <AccountPage {...routerProps}/>} 
+        />
+        {/* <Footer /> */}
       </div>
     );
   }
