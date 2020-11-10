@@ -14,7 +14,7 @@ const signup = (req,res) => {
                 return res.status(500).json(err);
             }
             req.body.password = hashedPwd;
-
+            console.log(req.body)
             User.create(req.body)
             .then(newUser => {
                 const token = jwt.sign(
@@ -31,6 +31,7 @@ const signup = (req,res) => {
                 res.redirect('/browse');
             })
             .catch(err => {
+                console.log(err)
                 if(err.name === 'SequelizeUniqueConstraintError'){
                     res.status(400).send(`Error: ${err.name}`)
                 }

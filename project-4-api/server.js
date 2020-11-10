@@ -1,9 +1,23 @@
+require('dotenv').config();
+
 const express = require('express');
 const jwt = require("jsonwebtoken");
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const routes = require('./routes');
 const app = express();
+
+const corsOptions = {
+    origin: ['http://localhost:3000'],
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
 
 const verifyToken = (req,res,next) => {
     let token = req.headers['authorization'];
@@ -30,6 +44,7 @@ app.use('/auth', routes.auth);
 app.use('/auth/verify', verifyToken, routes.auth);
 
 app.get('/', (req,res) => {
+    console.log("Splash Page")
     res.send('Splash page')
 })
 

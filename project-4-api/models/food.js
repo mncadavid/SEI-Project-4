@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Food.hasMany(models.Exposure, {foreignKey: "id"});
-      Food.belongsToMany(models.GroceryLists, {
+      Food.belongsToMany(models.GroceryList, {
         through: "GroceryListsFood",
         foreignKey: "foodId",
         otherKey: "listId"
