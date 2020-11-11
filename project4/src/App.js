@@ -16,7 +16,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentUser: null
+      currentUser: null,
+      openFood: false
     }
   }
 
@@ -54,6 +55,16 @@ class App extends Component {
   handleOpenFood = (e,food) => {
     e.preventDefault();
     console.log(`${food}`);
+    this.setState({
+      openFood: true
+    })
+  }
+  handleCloseFood = (e) => {
+    if(e.currentTarget===e.target){
+      this.setState({
+        openFood: false
+      })
+    }
   }
 
   handleAddToList = (e,food) => {
@@ -70,6 +81,9 @@ class App extends Component {
     return (
       <div className="App body">
         <Header />
+        {this.state.openFood && 
+          <FoodModal 
+            handleCloseFood={this.handleCloseFood}/>}
         <Route
           exact path="/"
           render={routerProps => <SplashPage 
@@ -94,7 +108,6 @@ class App extends Component {
           path="/account"
           render={routerProps => <AccountPage {...routerProps}/>} 
         />
-        
         <Footer />
       </div>
     );
