@@ -45,7 +45,13 @@
 .auth-button{
     margin: 5px;
 }
-
+.card-container{
+    overflow-y: scroll;
+    height: 71vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: row dense;
+}
 .food-card{
     display: flex;
     flex-direction: column;
@@ -68,6 +74,7 @@
     margin: 20px;
     width: 70%;
     text-align: center;
+    z-index: 1;
 }
 .food-modal-lower{
     display: flex;
@@ -105,6 +112,7 @@
     margin: 20px auto;
     padding: 5px 10px;
     width: 20%;
+    height: 40%;
 }
 .list-config-pane{
     display: flex;
@@ -153,6 +161,7 @@
 .filter-pane{
     border: solid black;
     width: 20%;
+    height: 40%;
 }
 
 .browse-page{
@@ -165,6 +174,8 @@
     display: flex;
     justify-content: space-around;
     padding: 10px;
+    height: 72vh;
+    align-items: center;
 }
 .search{
     margin: 10px auto;

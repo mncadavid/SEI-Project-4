@@ -51,14 +51,25 @@ class App extends Component {
     })
   }
 
+  handleOpenFood = (e,food) => {
+    e.preventDefault();
+    console.log(`${food}`);
+  }
+
+  handleAddToList = (e,food) => {
+    e.preventDefault();
+    console.log(`${food}`);
+  }
+
   componentDidMount(){
     this.handleVerify();
   }
 
+
   render(){
     return (
       <div className="App body">
-        {/* <Header /> */}
+        <Header />
         <Route
           exact path="/"
           render={routerProps => <SplashPage 
@@ -74,13 +85,17 @@ class App extends Component {
         />
         <Route 
           path="/browse"
-          render={routerProps => <BrowsePage {...routerProps}/>} 
+          render={routerProps => <BrowsePage 
+            handleOpenFood={this.handleOpenFood} 
+            handleAddToList={this.handleAddToList}
+            {...routerProps}/>} 
         />
         <Route
           path="/account"
           render={routerProps => <AccountPage {...routerProps}/>} 
         />
-        {/* <Footer /> */}
+        
+        <Footer />
       </div>
     );
   }

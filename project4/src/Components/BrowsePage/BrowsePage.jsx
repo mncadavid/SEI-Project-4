@@ -48,7 +48,11 @@ class BrowsePage extends Component{
                 </div>
                 <div className="browse-lower">
                     <FilterPane />
-                    <CardContainer foods={this.state.foods}/>
+                    <CardContainer 
+                        foods={this.state.foods}
+                        handleOpenFood={this.props.handleOpenFood}
+                        handleAddToList={this.props.handleAddToList}
+                    />
                     <AddFood handleAddFood={this.handleAddFood}/>
                 </div>
             </div>
