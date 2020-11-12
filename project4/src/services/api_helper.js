@@ -56,6 +56,7 @@ export const getLastExposure = async(searchObject) => {
 }
 
 export const addExposure = async(exposure) => {
+    console.log(exposure)
     const resp = await api.post('/exposures/add', exposure);
     return resp;
 }

@@ -8,7 +8,8 @@ class FoodCard extends Component{
         super(props);
 
         this.state = {
-            lastExposureDate: ""
+            lastExposureDate: "",
+            currentUser: this.props.currentUser,
         }
     }
 
@@ -18,7 +19,6 @@ class FoodCard extends Component{
             childId: this.props.currentUser.childId 
         }
         const lastExposure = await getLastExposure(searchObject);
-        console.log(`Last: ${lastExposure}`);
         if(lastExposure){
             const months = ['Jan.','Feb. ','Mar. ','Apr. ','May ','June ','July ','Aug. ','Sept. ','Oct. ','Nov. ','Dec. '];
             let fullDate = lastExposure;
@@ -37,7 +37,15 @@ class FoodCard extends Component{
     }
 
     componentDidMount(){
-        {this.props.currentUser && this.callGetLastExposure(this.props.food.id)};
+        this.props.currentUser && this.callGetLastExposure(this.props.food.id);
+    }
+    componentDidUpdate(){
+        if(this.props.currentUser !== this.state.currentUser){
+            this.setState({
+                currentUser: this.props.currentUser
+            })
+            this.props.currentUser && this.callGetLastExposure(this.props.food.id);
+        }
     }
 
     render(){
