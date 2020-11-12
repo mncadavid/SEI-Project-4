@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {FileSearchOutlined} from '@ant-design/icons';
-import {getLastExposure} from '../../services/api_helper';
-
 
 class FoodCard extends Component{
     constructor(props){

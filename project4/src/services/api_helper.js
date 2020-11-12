@@ -47,7 +47,7 @@ export const getFoodData = async(foodId,childId) => {
 
 export const getLastExposure = async(searchObject) => {
     const resp = await api.get(`/browse/${searchObject.childId}/${searchObject.foodId}`);
-    if(resp.data != ""){
+    if(resp.data !== ""){
         return resp.data.date;
     }
     else{

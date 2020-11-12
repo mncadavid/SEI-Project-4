@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {DatePicker, Input} from 'antd'; 
+import {Input} from 'antd'; 
 const { TextArea } = Input;
 
 class AddExposureForm extends Component{
