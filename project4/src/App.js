@@ -62,6 +62,7 @@ class App extends Component {
     this.setState({
       currentUser: null
     })
+    this.props.history.push('/');
   }
 
   handleOpenFood = async (e,foodId,childId) => {
@@ -95,7 +96,7 @@ class App extends Component {
     });
     this.callGetLastExposure(exposure.foodId);
   }
-  
+
   callGetLastExposure = async (foodId) => {
     let searchObject = {
         foodId: foodId,
@@ -151,7 +152,7 @@ handleAddFood = async (e,newFood) => {
   render(){
     return (
       <div className="App body">
-        <Header />
+        <Header handleLogout={this.handleLogout}/>
         {this.state.openFood && 
           <FoodModal 
             handleCloseFood={this.handleCloseFood}
