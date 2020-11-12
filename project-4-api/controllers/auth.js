@@ -27,8 +27,10 @@ const signup = (req,res) => {
                         expiresIn: "30 days"
                     }
                 )
-                res.cookie("jwt", token);
-                res.redirect('/browse');
+                newUser.dataValues.token = token;
+                delete newUser.dataValues.password;
+                console.log(newUser)
+                res.send(newUser);
             })
             .catch(err => {
                 console.log(err)
@@ -47,7 +49,8 @@ const login = (req,res) => {
     User.findOne({
         where: {
             username: req.body.username
-        }
+        },
+        attributes: ['name','childId','id','username','password']
     })
     .then(foundUser => {
         if(foundUser){
@@ -63,8 +66,9 @@ const login = (req,res) => {
                             expiresIn: "30 days"
                         }
                     )
-                    res.cookie("jwt", token);
-                    res.redirect(`/browse`);
+                    foundUser.dataValues.token = token;
+                    delete foundUser.dataValues.password;
+                    res.send(foundUser);
                 } else{
                     res.send(`Incorrect Password`)
                 }
