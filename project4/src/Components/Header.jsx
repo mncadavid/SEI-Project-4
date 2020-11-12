@@ -1,5 +1,4 @@
 import React from 'react';
-import {Button} from 'antd';
 
 function Header(){
     return(
@@ -8,7 +7,7 @@ function Header(){
             <h1>Food Folio</h1>
             <div className="auth-header">
                 <a href="#">My Account</a>
-                <Button type="primary" >Log Out</Button>
+                <button>Log Out</button>
             </div>
         </header>
     )

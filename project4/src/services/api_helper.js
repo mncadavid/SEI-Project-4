@@ -29,21 +29,19 @@ export const verifyUser = async () => {
 }
 
 export const getAllFood = async () => {
-    console.log("getting food")
     const resp = await api.get(`/browse`);
     return resp;
 }
 
 export const addFood = async (newFood) => {
-    console.log("adding food");
     const resp = await api.post('/browse/addfood', newFood);
     return resp;
 }
 
-export const getFoodData = async(foodName) => {
-    let foodObject = {food: foodName}
-    console.log("getting food data");
-    const resp = await api.get(`/exposures/${foodName}`);
+export const getFoodData = async(foodId,childId) => {
+    console.log(`Food: ${foodId}`)
+    console.log(`ChildId: ${childId}`);
+    const resp = await api.get(`/exposures/${foodId}/${childId}`);
     return resp;
 }
 
@@ -55,4 +53,9 @@ export const getLastExposure = async(searchObject) => {
     else{
         return false;
     }
+}
+
+export const addExposure = async(exposure) => {
+    const resp = await api.post('/exposures/add', exposure);
+    return resp;
 }

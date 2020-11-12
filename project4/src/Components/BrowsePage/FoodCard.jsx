@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Button} from 'antd';
 import {FileSearchOutlined} from '@ant-design/icons';
 import {getLastExposure} from '../../services/api_helper';
 
@@ -19,6 +18,7 @@ class FoodCard extends Component{
             childId: this.props.currentUser.childId 
         }
         const lastExposure = await getLastExposure(searchObject);
+        console.log(`Last: ${lastExposure}`);
         if(lastExposure){
             const months = ['Jan.','Feb. ','Mar. ','Apr. ','May ','June ','July ','Aug. ','Sept. ','Oct. ','Nov. ','Dec. '];
             let fullDate = lastExposure;
@@ -37,7 +37,7 @@ class FoodCard extends Component{
     }
 
     componentDidMount(){
-        this.callGetLastExposure(this.props.food.id);
+        {this.props.currentUser && this.callGetLastExposure(this.props.food.id)};
     }
 
     render(){
@@ -46,11 +46,11 @@ class FoodCard extends Component{
                 <h2>
                     {this.props.food.name}
                 </h2>
-                <FileSearchOutlined onClick={(e) => {this.props.handleOpenFood(e,this.props.food.name)}}/>
+                <FileSearchOutlined onClick={(e) => {this.props.handleOpenFood(e,this.props.food.id,this.props.currentUser.childId)}}/>
                 <p>{this.state.lastExposureDate}</p>
-                <Button type="primary" onClick={(e)=> {this.props.handleAddToList(e,this.props.food.name)}}>
+                <button onClick={(e)=> {this.props.handleAddToList(e,this.props.food.name)}}>
                     Add to grocery list
-                </Button>
+                </button>
             </div>
         )
     }

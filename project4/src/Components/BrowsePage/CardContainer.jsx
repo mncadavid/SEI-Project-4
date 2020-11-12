@@ -6,9 +6,10 @@ function CardContainer(props){
         <div className="card-container">
             {props.foods && props.foods.map((food,index) => {
                 let gridClass = "";
-                {index%2 == 0 ? gridClass = "grid-right" : gridClass = "grid-left"};
+                // {index%2 == 0 ? gridClass = "grid-right" : gridClass = "grid-left"};
                return <FoodCard 
                         food={food}
+                        key={index}
                         handleOpenFood={props.handleOpenFood}
                         handleAddToList={props.handleAddToList}
                         className={gridClass}

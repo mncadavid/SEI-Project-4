@@ -6,10 +6,9 @@ import FoodModal from './Components/ExposureModal/FoodModal';
 import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
-import { loginUser, registerUser, verifyUser, getFoodData } from './services/api_helper';
+import { loginUser, registerUser, verifyUser, getFoodData, addExposure } from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
-import {createBrowserHistory} from 'history';
 
 
 class App extends Component {
@@ -62,9 +61,10 @@ class App extends Component {
     })
   }
 
-  handleOpenFood = async (e,food) => {
+  handleOpenFood = async (e,foodId,childId) => {
     e.preventDefault();
-    const foodData = await getFoodData(food);
+    const foodData = await getFoodData(foodId,childId);
+    console.log(foodData);
     this.setState({
       openFood: true,
       foodData: foodData.data
@@ -73,7 +73,8 @@ class App extends Component {
   handleCloseFood = (e) => {
     if(e.currentTarget===e.target){
       this.setState({
-        openFood: false
+        openFood: false,
+        foodData: null
       })
     }
   }
@@ -82,9 +83,14 @@ class App extends Component {
     e.preventDefault();
     console.log(`${food}`);
   }
-  handleAddExposure = (e,exposure) => {
+  handleAddExposure = async (e,exposure) => {
     e.preventDefault();
-    console.log(exposure);
+    const exposureData = await addExposure(exposure);
+    console.log(`Added: ${exposureData.data}`)
+    this.setState({
+      foodData: exposureData.data
+    });
+
   }
 
   componentDidMount(){
@@ -106,7 +112,6 @@ class App extends Component {
           exact path="/"
           render={routerProps => <SplashPage 
           handleLogin={this.handleLogin}
-          handleVerify={this.handleVerify}
           handleSignUp={this.handleSignUp}
           {...routerProps}/>}
         />

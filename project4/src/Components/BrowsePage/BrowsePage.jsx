@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Input, Button} from 'antd';
+import {Input} from 'antd';
 import CardContainer from './CardContainer';
 import AddFood from './AddFood';
 import FilterPane from './FilterPane';
-import {getAllFood, addFood, getLastExposure} from '../../services/api_helper';
+import {getAllFood, addFood} from '../../services/api_helper';
 
 class BrowsePage extends Component{
     constructor(props){
@@ -44,7 +44,7 @@ class BrowsePage extends Component{
             <div className="browse-page">
                 <div className="search">
                     <Input/>
-                    <Button>Search</Button>
+                    <button>Search</button>
                 </div>
                 <div className="browse-lower">
                     <FilterPane />
