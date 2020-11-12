@@ -29,7 +29,7 @@ const getFoodData = (req, res) => {
                 attributes: ['foodId', 'date', 'reaction'],
                 include: [{
                     model: Food,
-                    attributes: ['name', 'category'],
+                    attributes: ['id','name', 'category'],
                     where: {
                         name: req.params.food
                     }
@@ -40,7 +40,16 @@ const getFoodData = (req, res) => {
     })
     .then(foundChild => {
         foundChild.dataValues.food = req.params.food;
-        res.send(foundChild);
+        Food.findAll({
+            where: {
+                name: req.params.food
+            }
+        })
+        .then(food => {
+            console.log(food);
+            foundChild.dataValues.foodId = food[0].dataValues.id;
+            res.send(foundChild);
+        })
     })
 };
 
