@@ -21,16 +21,20 @@ class App extends Component {
       openFood: false,
       foodModalData: null,
       lastExposureDates: {},
-      allFood: null
+      allFood: null,
+      currentChild: null
     }
   }
   handleSignUp = async(e,registerData) => {
     e.preventDefault();
     console.log(`RegisterData: ${registerData}`)
-    const currentUser = await registerUser(registerData);
+    const response = await registerUser(registerData);
+    let currentUser = response.user;
+    let currentChild = response.child;
     console.log(`Current User: ${currentUser}`)
     this.setState({
-      currentUser
+      currentUser,
+      currentChild
     })
     this.props.history.push('/browse');
 
@@ -44,8 +48,13 @@ class App extends Component {
       userId: resp.id,
       childId: resp.childId
     }
+    let currentChild = {
+      name: resp.Children[0].name,
+      age: resp.Children[0].age
+    }
     this.setState({
-      currentUser
+      currentUser,
+      currentChild
     })
     this.props.history.push('/browse');
   }
@@ -163,7 +172,6 @@ handleAddFood = async (e,newFood) => {
           handleSignUp={this.handleSignUp}
           {...routerProps}/>}
         />
-        {/* <FoodModal />  */}
         <Route
           path="/lists"
           render={routerProps => <ListPage {...routerProps}/>} 
@@ -183,7 +191,11 @@ handleAddFood = async (e,newFood) => {
         />
         <Route
           path="/account"
-          render={routerProps => <AccountPage {...routerProps}/>} 
+          render={routerProps => <AccountPage 
+            {...routerProps} 
+            user={this.state.currentUser} 
+            child={this.state.currentChild}
+          />} 
         />
         <Footer />
       </div>

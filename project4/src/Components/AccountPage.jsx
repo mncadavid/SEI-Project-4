@@ -1,12 +1,13 @@
 import React from 'react';
 
 
-function AccountPage(){
+function AccountPage(props){
+    console.log(props.user);
     return(
         <div className="account-page">
-            <h2>Hello, Marissa</h2>
-            <h3>Child: Luke</h3>
-            <h4>Age: 8 months</h4>
+            <h2>Hello, {props.user.name}!</h2>
+            <h3>Child: {props.child.name}</h3>
+            <h4>Age: {props.child.age}</h4>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Header(props){
     return(
@@ -6,7 +7,7 @@ function Header(props){
             <img className="logo" src="./food-clipart.png" alt="Logo"/>
             <h1>Food Folio</h1>
             <div className="auth-header">
-                <a href="#">My Account</a>
+                <Link to="/account">My Account</Link>
                 <button onClick={(e) => props.handleLogout()}>Log Out</button>
             </div>
         </header>
