@@ -6,7 +6,7 @@ import FoodModal from './Components/ExposureModal/FoodModal';
 import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
-import { loginUser, registerUser, verifyUser } from './services/api_helper';
+import { loginUser, registerUser, verifyUser, getFoodData } from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 
@@ -17,7 +17,8 @@ class App extends Component {
 
     this.state = {
       currentUser: null,
-      openFood: false
+      openFood: false,
+      foodData: null
     }
   }
 
@@ -52,11 +53,12 @@ class App extends Component {
     })
   }
 
-  handleOpenFood = (e,food) => {
+  handleOpenFood = async (e,food) => {
     e.preventDefault();
-    console.log(`${food}`);
+    const foodData = await getFoodData(food);
     this.setState({
-      openFood: true
+      openFood: true,
+      foodData: foodData.data
     })
   }
   handleCloseFood = (e) => {
@@ -83,7 +85,8 @@ class App extends Component {
         <Header />
         {this.state.openFood && 
           <FoodModal 
-            handleCloseFood={this.handleCloseFood}/>}
+            handleCloseFood={this.handleCloseFood}
+            foodData={this.state.foodData}/>}
         <Route
           exact path="/"
           render={routerProps => <SplashPage 

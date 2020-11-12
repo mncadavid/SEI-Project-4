@@ -2,11 +2,13 @@ import React from 'react';
 import SingleExposure from './SingleExposure';
 
 
-function ExposuresContainer(){
+function ExposuresContainer(props){
+    console.log(props.exposures);
     return(
         <div className="exposures-container">
-            <SingleExposure />
-            <SingleExposure />
+            {props.exposures.map(exposure => {
+                return <SingleExposure exposure={exposure}/>
+            })}
         </div>
     )
 }
