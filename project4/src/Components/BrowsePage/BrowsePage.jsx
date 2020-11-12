@@ -52,8 +52,10 @@ class BrowsePage extends Component{
                         foods={this.state.foods}
                         handleOpenFood={this.props.handleOpenFood}
                         handleAddToList={this.props.handleAddToList}
+                        currentUser={this.props.currentUser}
                     />
-                    <AddFood handleAddFood={this.handleAddFood}/>
+                    <AddFood 
+                        handleAddFood={this.handleAddFood}/>
                 </div>
             </div>
         )

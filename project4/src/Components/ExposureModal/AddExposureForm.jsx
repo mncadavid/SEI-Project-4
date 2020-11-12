@@ -8,7 +8,9 @@ class AddExposureForm extends Component{
         this.state = {
             date: null,
             reaction: "",
-            foodId: this.props.foodId
+            foodId: this.props.foodId,
+            userId: this.props.currentUser.id,
+            childId: this.props.currentUser.childId
         }
     }
 

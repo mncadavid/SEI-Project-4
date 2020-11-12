@@ -9,6 +9,7 @@ import AccountPage from './Components/AccountPage';
 import { loginUser, registerUser, verifyUser, getFoodData } from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 
 
 class App extends Component {
@@ -21,7 +22,6 @@ class App extends Component {
       foodData: null
     }
   }
-
   handleSignUp = async(e,registerData) => {
     e.preventDefault();
     console.log(`RegisterData: ${registerData}`)
@@ -30,15 +30,24 @@ class App extends Component {
     this.setState({
       currentUser
     })
+    this.props.history.push('/browse');
 
   }
   handleLogin = async (e,loginData) => {
     e.preventDefault();
-    const currentUser = await loginUser(loginData);
+    const resp = await loginUser(loginData);
+    let currentUser = {
+      name: resp.name,
+      username: resp.username,
+      userId: resp.userId,
+      childId: resp.childId
+    }
     this.setState({
       currentUser
     })
+    this.props.history.push('/browse');
   }
+
   handleVerify = async () => {
     const currentUser = await verifyUser();
     if(currentUser){
@@ -91,7 +100,8 @@ class App extends Component {
           <FoodModal 
             handleCloseFood={this.handleCloseFood}
             foodData={this.state.foodData}
-            handleAddExposure={this.handleAddExposure}/>}
+            handleAddExposure={this.handleAddExposure}
+            currentUser={this.state.currentUser}/>}
         <Route
           exact path="/"
           render={routerProps => <SplashPage 
@@ -110,7 +120,8 @@ class App extends Component {
           render={routerProps => <BrowsePage 
             handleOpenFood={this.handleOpenFood} 
             handleAddToList={this.handleAddToList}
-            {...routerProps}/>} 
+            {...routerProps}
+            currentUser={this.state.currentUser}/>} 
         />
         <Route
           path="/account"

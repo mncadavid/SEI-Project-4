@@ -3,7 +3,6 @@ import AddExposureForm from './AddExposureForm';
 import ExposuresContainer from './ExposuresContainer';
 
 function FoodModal(props){
-    console.log(props.foodData);
     let foodName=props.foodData.food;
     let exposures=props.foodData.Exposures;
     return(
@@ -14,7 +13,8 @@ function FoodModal(props){
                     <ExposuresContainer exposures={exposures}/>
                     <AddExposureForm 
                         handleAddExposure={props.handleAddExposure}
-                        foodId={props.foodData.foodId}/>
+                        foodId={props.foodData.foodId}
+                        currentUser={props.currentUser}/>
                 </div>
             </div>
         </div>

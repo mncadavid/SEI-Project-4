@@ -11,7 +11,8 @@ function CardContainer(props){
                         food={food}
                         handleOpenFood={props.handleOpenFood}
                         handleAddToList={props.handleAddToList}
-                        className={gridClass}/>
+                        className={gridClass}
+                        currentUser={props.currentUser}/>
             })}
         </div>
     )

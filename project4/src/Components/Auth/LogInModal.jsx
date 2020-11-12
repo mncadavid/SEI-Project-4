@@ -29,12 +29,14 @@ class LogInModal extends Component{
                         value={this.state.username}
                         onChange={this.handleChange}
                     />
+                    <p>Password:</p>
                     <input
                         type="password"
                         name="password"
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
+                    <br /><br/>
                     <input type="submit" value="Log In"/>
                 </form>
             </div>
