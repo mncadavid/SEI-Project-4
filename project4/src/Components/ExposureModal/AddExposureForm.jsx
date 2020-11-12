@@ -24,12 +24,18 @@ class AddExposureForm extends Component{
     render(){
         return(
             <div className="add-exposure-form">
-                <form onSubmit={(e)=>this.props.handleAddExposure(e,this.state)}>
+                <form onSubmit={(e)=>{
+                        this.props.handleAddExposure(e,this.state)
+                        this.setState({
+                            date: null,
+                            reaction: ""
+                        });
+                        }}>
                     <h3>Add an Exposure</h3>
                     <p>Date:</p>
-                    <input type="date" name="date" onChange={this.handleChange}/>
+                    <input type="date" name="date" value={this.state.date} onChange={this.handleChange}/>
                     <p>Notes:</p>
-                    <TextArea name="reaction" rows={4} onChange={this.handleChange}/>
+                    <TextArea name="reaction" rows={4} value={this.state.reaction} onChange={this.handleChange}/>
                     <br />
                     <button type="submit">Submit</button>
                 </form>
