@@ -21,7 +21,31 @@ const index = (req, res) => {
     })
 };
 
+const getFoodData = (req, res) => {
+    Child.findByPk(1, {
+        include: [
+            {
+                model: Exposure,
+                attributes: ['foodId', 'date', 'reaction'],
+                include: [{
+                    model: Food,
+                    attributes: ['name', 'category'],
+                    where: {
+                        name: req.params.food
+                    }
+                }]
+            }
+        ],
+        attributes: ['name', 'age']
+    })
+    .then(foundChild => {
+        foundChild.dataValues.food = req.params.food;
+        res.send(foundChild);
+    })
+};
+
 
 module.exports = {
-    index
+    index,
+    getFoodData
 }
