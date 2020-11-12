@@ -1,21 +1,39 @@
-import React from 'react';
-import {DatePicker, Input, Button} from 'antd'; 
+import React, { Component } from 'react';
+import {DatePicker, Input} from 'antd'; 
 const { TextArea } = Input;
 
-function AddExposureForm(){
-    return(
-        <div className="add-exposure-form">
-            <form>
-                <h3>Add an Exposure</h3>
-                <p>Date:</p>
-                <DatePicker />
-                <p>Notes:</p>
-                <TextArea rows={4} />
-                <br />
-                <Button type="primary">Submit</Button>
-            </form>
-        </div>
-    )
+class AddExposureForm extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            date: null,
+            reaction: "",
+            foodId: this.props.foodId
+        }
+    }
+
+    handleChange= (e) => {
+        const {name,value} = e.target;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    render(){
+        return(
+            <div className="add-exposure-form">
+                <form onSubmit={(e)=>this.props.handleAddExposure(e,this.state)}>
+                    <h3>Add an Exposure</h3>
+                    <p>Date:</p>
+                    <input type="date" name="date" onChange={this.handleChange}/>
+                    <p>Notes:</p>
+                    <TextArea name="reaction" rows={4} onChange={this.handleChange}/>
+                    <br />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        )
+    }
 }
 
 export default AddExposureForm;

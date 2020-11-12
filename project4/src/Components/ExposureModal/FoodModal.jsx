@@ -12,7 +12,9 @@ function FoodModal(props){
                 <h2>{foodName}</h2>
                 <div className="food-modal-lower">
                     <ExposuresContainer exposures={exposures}/>
-                    <AddExposureForm />
+                    <AddExposureForm 
+                        handleAddExposure={props.handleAddExposure}
+                        foodId={props.foodData.foodId}/>
                 </div>
             </div>
         </div>

@@ -73,6 +73,10 @@ class App extends Component {
     e.preventDefault();
     console.log(`${food}`);
   }
+  handleAddExposure = (e,exposure) => {
+    e.preventDefault();
+    console.log(exposure);
+  }
 
   componentDidMount(){
     this.handleVerify();
@@ -86,7 +90,8 @@ class App extends Component {
         {this.state.openFood && 
           <FoodModal 
             handleCloseFood={this.handleCloseFood}
-            foodData={this.state.foodData}/>}
+            foodData={this.state.foodData}
+            handleAddExposure={this.handleAddExposure}/>}
         <Route
           exact path="/"
           render={routerProps => <SplashPage 
