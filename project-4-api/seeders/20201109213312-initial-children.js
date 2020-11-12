@@ -10,6 +10,10 @@ module.exports = {
       {
         name: "Milo",
         age: 4
+      },
+      {
+        name: 'Sam',
+        age: 2
       }
     ], {});
   },
