@@ -10,7 +10,7 @@ export const registerUser = async(registerData) => {
     console.log(resp);
     localStorage.setItem('authToken', resp.data.token);
     api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`;
-    return resp.data.user;
+    return resp.data;
 }
 
 export const loginUser = async(loginData) => {

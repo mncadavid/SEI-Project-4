@@ -8,7 +8,8 @@ class SignUpModal extends Component{
             name: "",
             username: "",
             password: "",
-            childId: 3
+            childName: "",
+            childAge: 0
         }
     }
 
@@ -24,23 +25,39 @@ class SignUpModal extends Component{
             <div className="sign-up-modal">
                 <form onSubmit = {(e) => this.props.handleSignUp(e,this.state)}>
                     <h2>Sign Up</h2>
-                    <p>Username:</p>
-                    <input
+                    <p>Name:</p>
+                    <input required
                         type="text"
                         name="name"
                         value={this.state.name}
                         onChange={this.handleChange}
                     />
-                    <input
+                    <p>Username:</p>
+                    <input required
                         type="text"
                         name="username"
                         value={this.state.username}
                         onChange={this.handleChange}
                     />
-                    <input
+                    <p>Password:</p>
+                    <input required
                         type="password"
                         name="password"
                         value={this.state.password}
+                        onChange={this.handleChange}
+                    />
+                    <p>Child's Name:</p>
+                    <input required
+                        type="text"
+                        name="childName"
+                        value={this.state.childName}
+                        onChange={this.handleChange}
+                    />
+                    <p>Child's Age:</p>
+                    <input required
+                        type="text"
+                        name="childAge"
+                        value={this.state.childAge}
                         onChange={this.handleChange}
                     />
                     <input type="submit" value="Sign Up"/>
