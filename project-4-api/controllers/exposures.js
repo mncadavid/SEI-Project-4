@@ -21,39 +21,6 @@ const index = (req, res) => {
     })
 };
 
-// const getFoodData = (req, res) => {
-//     console.log("======================")
-//     console.log(req.params.childId)
-//     Child.findByPk(req.params.childId, {
-//         include: [
-//             {
-//                 model: Exposure,
-//                 attributes: ['foodId', 'date', 'reaction'],
-//                 include: [{
-//                     model: Food,
-//                     attributes: ['id','name', 'category'],
-//                     where: {
-//                         name: req.params.food
-//                     }
-//                 }]
-//             }
-//         ],
-//         attributes: ['name', 'age']
-//     })
-//     .then(foundChild => {
-//         foundChild.dataValues.food = req.params.food;
-//         Food.findAll({
-//             where: {
-//                 name: req.params.food
-//             }
-//         })
-//         .then(food => {
-//             foundChild.dataValues.foodId = food[0].dataValues.id;
-//             console.log(`Going to send: ${foundChild.dataValues}`);
-//             res.send(foundChild);
-//         })
-//     })
-// };
 
 const getFoodData = (req, res) => {
     console.log("======================")
