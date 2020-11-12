@@ -6,7 +6,7 @@ function FoodModal(props){
     // let foodName=props.foodData.food;
     // let foodId = props.foodData.foodId;
     // let exposures=props.foodData.exposures;
-    console.log(props.foodData);
+    // console.log(props.foodData);
     return(
         <div className="food-modal-container" onClick={(e)=>props.handleCloseFood(e)}>
             <div className="food-modal">

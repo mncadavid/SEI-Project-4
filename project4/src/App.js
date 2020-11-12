@@ -7,6 +7,7 @@ import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
 import { loginUser, registerUser, verifyUser, getFoodData, addExposure, getLastExposure } from './services/api_helper';
+import {getAllFood, addFood} from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 
@@ -18,8 +19,9 @@ class App extends Component {
     this.state = {
       currentUser: null,
       openFood: false,
-      foodData: null,
-      lastExposureDates: {}
+      foodModalData: null,
+      lastExposureDates: {},
+      allFood: null
     }
   }
   handleSignUp = async(e,registerData) => {
@@ -68,14 +70,14 @@ class App extends Component {
     console.log(foodData);
     this.setState({
       openFood: true,
-      foodData: foodData.data
+      foodModalData: foodData.data
     })
   }
   handleCloseFood = (e) => {
     if(e.currentTarget===e.target){
       this.setState({
         openFood: false,
-        foodData: null
+        foodModalData: null
       })
     }
   }
@@ -89,11 +91,11 @@ class App extends Component {
     const exposureData = await addExposure(exposure);
     console.log(`Added: ${exposureData.data}`)
     this.setState({
-      foodData: exposureData.data
+      foodModalData: exposureData.data
     });
-
-
+    this.callGetLastExposure(exposure.foodId);
   }
+  
   callGetLastExposure = async (foodId) => {
     let searchObject = {
         foodId: foodId,
@@ -121,6 +123,26 @@ class App extends Component {
     }
 }
 
+callGetAllFood = async () => {
+  const foods = await getAllFood();
+  if(foods){
+      this.setState({
+          allFood: foods.data
+      })
+  }
+}
+handleAddFood = async (e,newFood) => {
+  e.preventDefault();
+  const allFoodsPlusNew = await addFood(newFood);
+  // console.log(`Response: ${allFoodsPlusNew}`);
+  if(allFoodsPlusNew){
+      this.setState({
+          allFood: allFoodsPlusNew.data
+      })
+  }
+
+}
+
   componentDidMount(){
     this.handleVerify();
   }
@@ -133,7 +155,7 @@ class App extends Component {
         {this.state.openFood && 
           <FoodModal 
             handleCloseFood={this.handleCloseFood}
-            foodData={this.state.foodData}
+            foodData={this.state.foodModalData}
             handleAddExposure={this.handleAddExposure}
             currentUser={this.state.currentUser}/>}
         <Route
@@ -155,9 +177,11 @@ class App extends Component {
             handleAddToList={this.handleAddToList}
             {...routerProps}
             currentUser={this.state.currentUser}
-            foodData={this.state.foodData}
             callGetLastExposure={this.callGetLastExposure}
-            lastExposureDates={this.state.lastExposureDates}/>} 
+            lastExposureDates={this.state.lastExposureDates}
+            handleAddFood={this.handleAddFood}
+            callGetAllFood={this.callGetAllFood}
+            allFood={this.state.allFood}/>} 
         />
         <Route
           path="/account"
