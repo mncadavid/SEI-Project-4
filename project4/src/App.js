@@ -68,7 +68,6 @@ class App extends Component {
   handleOpenFood = async (e,foodId,childId) => {
     e.preventDefault();
     const foodData = await getFoodData(foodId,childId);
-    console.log(foodData);
     this.setState({
       openFood: true,
       foodModalData: foodData.data
@@ -90,7 +89,6 @@ class App extends Component {
   handleAddExposure = async (e,exposure) => {
     e.preventDefault();
     const exposureData = await addExposure(exposure);
-    console.log(`Added: ${exposureData.data}`)
     this.setState({
       foodModalData: exposureData.data
     });
@@ -135,7 +133,6 @@ callGetAllFood = async () => {
 handleAddFood = async (e,newFood) => {
   e.preventDefault();
   const allFoodsPlusNew = await addFood(newFood);
-  // console.log(`Response: ${allFoodsPlusNew}`);
   if(allFoodsPlusNew){
       this.setState({
           allFood: allFoodsPlusNew.data
