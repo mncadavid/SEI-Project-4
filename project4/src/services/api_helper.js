@@ -30,7 +30,7 @@ export const verifyUser = async () => {
 
 export const getAllFood = async () => {
     console.log("getting food")
-    const resp = await api.get('/browse');
+    const resp = await api.get(`/browse`);
     return resp;
 }
 
@@ -45,4 +45,14 @@ export const getFoodData = async(foodName) => {
     console.log("getting food data");
     const resp = await api.get(`/exposures/${foodName}`);
     return resp;
+}
+
+export const getLastExposure = async(searchObject) => {
+    const resp = await api.get(`/browse/${searchObject.childId}/${searchObject.foodId}`);
+    if(resp.data != ""){
+        return resp.data.date;
+    }
+    else{
+        return false;
+    }
 }

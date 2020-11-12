@@ -3,7 +3,7 @@ import {Input, Button} from 'antd';
 import CardContainer from './CardContainer';
 import AddFood from './AddFood';
 import FilterPane from './FilterPane';
-import {getAllFood, addFood} from '../../services/api_helper';
+import {getAllFood, addFood, getLastExposure} from '../../services/api_helper';
 
 class BrowsePage extends Component{
     constructor(props){

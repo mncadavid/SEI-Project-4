@@ -39,7 +39,7 @@ class App extends Component {
     let currentUser = {
       name: resp.name,
       username: resp.username,
-      userId: resp.userId,
+      userId: resp.id,
       childId: resp.childId
     }
     this.setState({
