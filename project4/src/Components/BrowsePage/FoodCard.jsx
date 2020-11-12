@@ -10,41 +10,42 @@ class FoodCard extends Component{
         this.state = {
             lastExposureDate: "",
             currentUser: this.props.currentUser,
+            food: this.props.food
         }
     }
 
-    callGetLastExposure = async (foodId) => {
-        let searchObject = {
-            foodId: foodId,
-            childId: this.props.currentUser.childId 
-        }
-        const lastExposure = await getLastExposure(searchObject);
-        if(lastExposure){
-            const months = ['Jan.','Feb. ','Mar. ','Apr. ','May ','June ','July ','Aug. ','Sept. ','Oct. ','Nov. ','Dec. '];
-            let fullDate = lastExposure;
-            let monthIndex = fullDate.substring(5,7);
-            let month = months[monthIndex-1];
-            let day = fullDate = fullDate.substring(8,10);
-            this.setState({
-                lastExposureDate: `${month}${day}`
-            });
-        }
-        else{
-            this.setState({
-                lastExposureDate: "New Food"
-            })
-        }
-    }
+    // callGetLastExposure = async (foodId) => {
+    //     let searchObject = {
+    //         foodId: foodId,
+    //         childId: this.props.currentUser.childId 
+    //     }
+    //     const lastExposure = await getLastExposure(searchObject);
+    //     if(lastExposure){
+    //         const months = ['Jan.','Feb. ','Mar. ','Apr. ','May ','June ','July ','Aug. ','Sept. ','Oct. ','Nov. ','Dec. '];
+    //         let fullDate = lastExposure;
+    //         let monthIndex = fullDate.substring(5,7);
+    //         let month = months[monthIndex-1];
+    //         let day = fullDate = fullDate.substring(8,10);
+    //         this.setState({
+    //             lastExposureDate: `${month}${day}`
+    //         });
+    //     }
+    //     else{
+    //         this.setState({
+    //             lastExposureDate: "New Food"
+    //         })
+    //     }
+    // }
 
     componentDidMount(){
-        this.props.currentUser && this.callGetLastExposure(this.props.food.id);
+        this.props.currentUser && this.props.callGetLastExposure(this.props.food.id);
     }
     componentDidUpdate(){
         if(this.props.currentUser !== this.state.currentUser){
             this.setState({
-                currentUser: this.props.currentUser
+                currentUser: this.props.currentUser,
             })
-            this.props.currentUser && this.callGetLastExposure(this.props.food.id);
+            this.props.currentUser && this.props.callGetLastExposure(this.props.food.id);
         }
     }
 
@@ -55,7 +56,7 @@ class FoodCard extends Component{
                     {this.props.food.name}
                 </h2>
                 <FileSearchOutlined onClick={(e) => {this.props.handleOpenFood(e,this.props.food.id,this.props.currentUser.childId)}}/>
-                <p>{this.state.lastExposureDate}</p>
+                <p>{this.props.lastExposureDate}</p>
                 <button onClick={(e)=> {this.props.handleAddToList(e,this.props.food.name)}}>
                     Add to grocery list
                 </button>

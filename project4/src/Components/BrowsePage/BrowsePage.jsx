@@ -53,6 +53,8 @@ class BrowsePage extends Component{
                         handleOpenFood={this.props.handleOpenFood}
                         handleAddToList={this.props.handleAddToList}
                         currentUser={this.props.currentUser}
+                        callGetLastExposure={this.props.callGetLastExposure}
+                        lastExposureDates={this.props.lastExposureDates}
                     />
                     <AddFood 
                         handleAddFood={this.handleAddFood}/>

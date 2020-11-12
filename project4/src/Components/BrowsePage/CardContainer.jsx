@@ -6,6 +6,8 @@ function CardContainer(props){
         <div className="card-container">
             {props.foods && props.foods.map((food,index) => {
                 let gridClass = "";
+                let foodId = food.id;
+                console.log(props.lastExposureDates[foodId]);
                 // {index%2 == 0 ? gridClass = "grid-right" : gridClass = "grid-left"};
                return <FoodCard 
                         food={food}
@@ -13,7 +15,9 @@ function CardContainer(props){
                         handleOpenFood={props.handleOpenFood}
                         handleAddToList={props.handleAddToList}
                         className={gridClass}
-                        currentUser={props.currentUser}/>
+                        currentUser={props.currentUser}
+                        callGetLastExposure={props.callGetLastExposure}
+                        lastExposureDate={props.lastExposureDates[foodId]}/>
             })}
         </div>
     )

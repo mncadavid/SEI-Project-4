@@ -29,7 +29,8 @@ const getFoodData = (req, res) => {
         where: {
             childId: req.params.childId,
             foodId: req.params.foodId
-        }
+        },
+        orderBy
     })
     .then(foundExposures => {
         let response = {

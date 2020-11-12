@@ -6,7 +6,7 @@ import FoodModal from './Components/ExposureModal/FoodModal';
 import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
-import { loginUser, registerUser, verifyUser, getFoodData, addExposure } from './services/api_helper';
+import { loginUser, registerUser, verifyUser, getFoodData, addExposure, getLastExposure } from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 
@@ -18,7 +18,8 @@ class App extends Component {
     this.state = {
       currentUser: null,
       openFood: false,
-      foodData: null
+      foodData: null,
+      lastExposureDates: {}
     }
   }
   handleSignUp = async(e,registerData) => {
@@ -90,9 +91,35 @@ class App extends Component {
     this.setState({
       foodData: exposureData.data
     });
-    
+
 
   }
+  callGetLastExposure = async (foodId) => {
+    let searchObject = {
+        foodId: foodId,
+        childId: this.state.currentUser.childId 
+    }
+    const lastExposure = await getLastExposure(searchObject);
+    if(lastExposure){
+        const months = ['Jan.','Feb. ','Mar. ','Apr. ','May ','June ','July ','Aug. ','Sept. ','Oct. ','Nov. ','Dec. '];
+        let fullDate = lastExposure;
+        let monthIndex = fullDate.substring(5,7);
+        let month = months[monthIndex-1];
+        let day = fullDate = fullDate.substring(8,10);
+        let lastExposureDatesCopy = this.state.lastExposureDates;
+        lastExposureDatesCopy[foodId] = `${month}${day}`
+        this.setState({
+            lastExposureDates: lastExposureDatesCopy
+        });
+    }
+    else{
+      let lastExposureDatesCopy = this.state.lastExposureDates;
+      lastExposureDatesCopy[foodId] = `New Food`;
+      this.setState({
+          lastExposureDate: lastExposureDatesCopy
+      })
+    }
+}
 
   componentDidMount(){
     this.handleVerify();
@@ -127,7 +154,10 @@ class App extends Component {
             handleOpenFood={this.handleOpenFood} 
             handleAddToList={this.handleAddToList}
             {...routerProps}
-            currentUser={this.state.currentUser}/>} 
+            currentUser={this.state.currentUser}
+            foodData={this.state.foodData}
+            callGetLastExposure={this.callGetLastExposure}
+            lastExposureDates={this.state.lastExposureDates}/>} 
         />
         <Route
           path="/account"
