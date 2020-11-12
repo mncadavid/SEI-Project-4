@@ -53,7 +53,7 @@ const addExposure = (req,res) => {
     .then(newExposure => {
         Food.findByPk(newExposure.dataValues.foodId)
         .then(food => {
-            res.redirect(`/exposures/${food.name}/${newExposure.dataValues.childId}`)
+            res.redirect(`/exposures/${food.id}/${newExposure.dataValues.childId}`)
         })
     })
 }
