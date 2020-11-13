@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    // baseURL: "http://localhost:9000"
-    baseURL: "https://boiling-earth-32454.herokuapp.com/"
+    baseURL: "http://localhost:9000"
+    // baseURL: "https://boiling-earth-32454.herokuapp.com/"
 })
 
 export const registerUser = async(registerData) => {
@@ -66,7 +66,7 @@ export const addExposure = async(exposure) => {
 export const getLists = async(userId) => {
     const resp = await api.get(`/lists/${userId}`);
     console.log(resp)
-    return resp.data.GroceryLists;
+    return resp.data;
 }
 export const createList = async(listName,userId) => {
     let listObject = {
@@ -74,5 +74,5 @@ export const createList = async(listName,userId) => {
         userId: userId
     }
     const resp = await api.post(`/lists/create`, listObject);
-    return resp.data.GroceryLists;
+    return resp.data;
 }
