@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Input, Button}  from 'antd';
 import ListsContainer from './ListsContainer';
+import {Link} from 'react-router-dom';
 
 
-function ListConfigPane(){
+function ListConfigPane(props){
+    console.log(props);
+    const [createListName, setCreateListName] = useState(null);
     return(
         <div className="list-config-pane">
             <p>List Name:</p>
             <Input />
             <Button>Update List Name</Button> <br />
-            <Button>Browse for Food</Button> <br />
+            <Link to="/browse"><Button>Browse for Food</Button></Link> <br />
             <Button>Clear List</Button><br />
             <Button>Email My List</Button>
             <p>See Another List</p>
-            <ListsContainer />
-            <Button>Add a List</Button>
+            <ListsContainer lists={props.lists}/>
+            <br />
+            <p>New List Name:</p>
+            <Input name="name" onChange={(e) => {setCreateListName(e.target.value)}}/>
+            <Button onClick={(e) => {e.preventDefault(); props.handleCreateList(createListName)}}>Create List</Button>
         </div>
     )
 }

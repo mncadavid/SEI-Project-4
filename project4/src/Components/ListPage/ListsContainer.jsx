@@ -1,11 +1,13 @@
 import React from 'react';
 import ListTitleTag from './ListTitleTag';
 
-function ListsContainer(){
+function ListsContainer(props){
+    console.log(props.lists)
     return(
         <div className="lists-container">
-            <ListTitleTag />
-            <ListTitleTag />
+            {props.lists.map((list,index) => {
+                <ListTitleTag key={index} list={list}/>
+            })}
         </div>
     )
 }

@@ -7,7 +7,7 @@ import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
 import { loginUser, registerUser, verifyUser, getFoodData, addExposure, getLastExposure } from './services/api_helper';
-import {getAllFood, addFood} from './services/api_helper';
+import {getAllFood, addFood, getLists,createList} from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 
@@ -22,7 +22,8 @@ class App extends Component {
       foodModalData: null,
       lastExposureDates: {},
       allFood: null,
-      currentChild: null
+      currentChild: null,
+      lists: []
     }
   }
   handleSignUp = async(e,registerData) => {
@@ -45,7 +46,7 @@ class App extends Component {
     let currentUser = {
       name: resp.name,
       username: resp.username,
-      userId: resp.id,
+      id: resp.id,
       childId: resp.childId
     }
     let currentChild = {
@@ -150,7 +151,22 @@ handleAddFood = async (e,newFood) => {
 
 }
 
+callGetLists = async (userId) => {
+  const lists = await getLists(userId);
+  this.setState({
+    lists
+  })
+}
+handleCreateList = async(listName) => {
+  const lists = await createList(listName,this.state.currentUser.id);
+  this.setState({
+    lists
+  })
+
+}
+
   componentDidMount(){
+    console.log("mounted")
     this.handleVerify();
   }
 
@@ -158,7 +174,10 @@ handleAddFood = async (e,newFood) => {
   render(){
     return (
       <div className="App body">
-        {!this.state.currentUser && <Header handleLogout={this.handleLogout}/>}
+        <Route
+          path={["/browse","/account","/lists"]} 
+          render={routerProps => <Header handleLogout={this.handleLogout}/>}
+        />
         {this.state.openFood && 
           <FoodModal 
             handleCloseFood={this.handleCloseFood}
@@ -174,7 +193,12 @@ handleAddFood = async (e,newFood) => {
         />
         <Route
           path="/lists"
-          render={routerProps => <ListPage {...routerProps}/>} 
+          render={routerProps => <ListPage 
+          {...routerProps} 
+          callGetLists={this.callGetLists}
+          user={this.state.currentUser}
+          lists={this.state.lists}
+          handleCreateList={this.handleCreateList}/>} 
         />
         <Route 
           path="/browse"
@@ -197,7 +221,10 @@ handleAddFood = async (e,newFood) => {
             child={this.state.currentChild}
           />} 
         />
-        <Footer />
+        <Route
+          path={["/browse","/account","/lists"]} 
+          render={routerProps => <Footer/>}
+        />
       </div>
     );
   }

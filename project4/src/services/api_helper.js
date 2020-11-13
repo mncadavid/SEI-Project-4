@@ -62,3 +62,16 @@ export const addExposure = async(exposure) => {
     const resp = await api.post('/exposures/add', exposure);
     return resp;
 }
+
+export const getLists = async(userId) => {
+    const resp = await api.get(`/lists/${userId}`);
+    return resp.data.GroceryLists;
+}
+export const createList = async(listName,userId) => {
+    let listObject = {
+        name: listName,
+        userId: userId
+    }
+    const resp = await api.post(`/lists/create`, listObject);
+    return resp.data.GroceryLists;
+}
