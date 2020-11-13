@@ -40,15 +40,15 @@ export const addFood = async (newFood) => {
     return resp;
 }
 
-export const getFoodData = async(foodId,childId) => {
-    console.log(`Food: ${foodId}`)
-    console.log(`ChildId: ${childId}`);
-    const resp = await api.get(`/exposures/${foodId}/${childId}`);
+export const getFoodData = async(food_id,child_id) => {
+    console.log(`Food: ${food_id}`)
+    console.log(`Child_id: ${child_id}`);
+    const resp = await api.get(`/exposures/${food_id}/${child_id}`);
     return resp;
 }
 
 export const getLastExposure = async(searchObject) => {
-    const resp = await api.get(`/browse/${searchObject.childId}/${searchObject.foodId}`);
+    const resp = await api.get(`/browse/${searchObject.child_id}/${searchObject.food_id}`);
     if(resp.data !== ""){
         return resp.data.date;
     }
@@ -63,15 +63,15 @@ export const addExposure = async(exposure) => {
     return resp;
 }
 
-export const getLists = async(userId) => {
-    const resp = await api.get(`/lists/${userId}`);
+export const getLists = async(user_id) => {
+    const resp = await api.get(`/lists/${user_id}`);
     console.log(resp)
     return resp.data;
 }
-export const createList = async(listName,userId) => {
+export const createList = async(listName,user_id) => {
     let listObject = {
         name: listName,
-        userId: userId
+        user_id: user_id
     }
     const resp = await api.post(`/lists/create`, listObject);
     return resp.data;
@@ -82,6 +82,6 @@ export const deleteList = async(list) => {
     return resp.data;  
 }
 
-export const addFoodToList = async(listId,foodId) => {
+export const addFoodToList = async(list_id,food_id) => {
 
 }

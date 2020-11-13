@@ -48,11 +48,11 @@ class App extends Component {
       name: resp.name,
       username: resp.username,
       id: resp.id,
-      childId: resp.childId
+      child_id: resp.child_id
     }
     let currentChild = {
-      name: resp.Children[0].name,
-      age: resp.Children[0].age
+      name: resp.children[0].name,
+      age: resp.children[0].age
     }
     this.setState({
       currentUser,
@@ -77,9 +77,9 @@ class App extends Component {
     this.props.history.push('/');
   }
 
-  handleOpenFood = async (e,foodId,childId) => {
+  handleOpenFood = async (e,food_id,child_id) => {
     e.preventDefault();
-    const foodData = await getFoodData(foodId,childId);
+    const foodData = await getFoodData(food_id,child_id);
     this.setState({
       openFood: true,
       foodModalData: foodData.data
@@ -104,13 +104,13 @@ class App extends Component {
     this.setState({
       foodModalData: exposureData.data
     });
-    this.callGetLastExposure(exposure.foodId);
+    this.callGetLastExposure(exposure.food_id);
   }
 
-  callGetLastExposure = async (foodId) => {
+  callGetLastExposure = async (food_id) => {
     let searchObject = {
-        foodId: foodId,
-        childId: this.state.currentUser.childId 
+        food_id: food_id,
+        child_id: this.state.currentUser.child_id 
     }
     const lastExposure = await getLastExposure(searchObject);
     if(lastExposure){
@@ -120,14 +120,14 @@ class App extends Component {
         let month = months[monthIndex-1];
         let day = fullDate = fullDate.substring(8,10);
         let lastExposureDatesCopy = this.state.lastExposureDates;
-        lastExposureDatesCopy[foodId] = `${month}${day}`
+        lastExposureDatesCopy[food_id] = `${month}${day}`
         this.setState({
             lastExposureDates: lastExposureDatesCopy
         });
     }
     else{
       let lastExposureDatesCopy = this.state.lastExposureDates;
-      lastExposureDatesCopy[foodId] = `New Food`;
+      lastExposureDatesCopy[food_id] = `New Food`;
       this.setState({
           lastExposureDate: lastExposureDatesCopy
       })
@@ -151,8 +151,8 @@ handleAddFood = async (e,newFood) => {
       })
   }
 }
-callGetLists = async (userId) => {
-  const lists = await getLists(userId);
+callGetLists = async (user_id) => {
+  const lists = await getLists(user_id);
   console.log(`Lists:`)
   console.log(lists);
   this.setState({
@@ -168,7 +168,7 @@ handleCreateList = async(listName) => {
 handleDeleteList = async(e) => {
   e.preventDefault();
   let listInfo = this.state.selectedList;
-  listInfo.userId = this.state.currentUser.id;
+  listInfo.user_id = this.state.currentUser.id;
   const lists = await deleteList(listInfo);
   this.setState({
     lists: lists,
@@ -183,7 +183,6 @@ setSelectedList = (list) => {
   async componentDidMount(){
     console.log("mounted")
     const verifyDone = await this.handleVerify();
-    this.callGetLists(this.state.currentUser.id);
   }
 
 

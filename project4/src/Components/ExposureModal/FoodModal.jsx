@@ -11,7 +11,7 @@ function FoodModal(props){
                     <ExposuresContainer exposures={props.foodData.exposures}/>
                     <AddExposureForm 
                         handleAddExposure={props.handleAddExposure}
-                        foodId={props.foodData.foodId}
+                        food_id={props.foodData.food_id}
                         currentUser={props.currentUser}/>
                 </div>
             </div>
