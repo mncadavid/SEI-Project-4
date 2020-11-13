@@ -16,7 +16,8 @@ function CardContainer(props){
                         className={gridClass}
                         currentUser={props.currentUser}
                         callGetLastExposure={props.callGetLastExposure}
-                        lastExposureDate={props.lastExposureDates[foodId]}/>
+                        lastExposureDate={props.lastExposureDates[foodId]}
+                        handleOpenAddToListModal={props.handleOpenAddToListModal}/>
             })}
         </div>
     )

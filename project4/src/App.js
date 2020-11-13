@@ -23,7 +23,8 @@ class App extends Component {
       lastExposureDates: {},
       allFood: null,
       currentChild: null,
-      lists: []
+      lists: [],
+      selectedList: []
     }
   }
   handleSignUp = async(e,registerData) => {
@@ -65,6 +66,7 @@ class App extends Component {
     if(currentUser){
       this.setState({currentUser});
     }
+    return true;
   }
 
   handleLogout = () => {
@@ -92,7 +94,7 @@ class App extends Component {
     }
   }
 
-  handleAddToList = (e,food) => {
+  handleAddToList = async (e,food) => {
     e.preventDefault();
     console.log(`${food}`);
   }
@@ -148,9 +150,7 @@ handleAddFood = async (e,newFood) => {
           allFood: allFoodsPlusNew.data
       })
   }
-
 }
-
 callGetLists = async (userId) => {
   const lists = await getLists(userId);
   console.log(`Lists:`)
@@ -164,12 +164,16 @@ handleCreateList = async(listName) => {
   this.setState({
     lists
   })
-
 }
-
-  componentDidMount(){
+setSelectedList = (list) => {
+  this.setState({
+      selectedList: list
+  })
+}
+  async componentDidMount(){
     console.log("mounted")
-    this.handleVerify();
+    const verifyDone = await this.handleVerify();
+    this.callGetLists(this.state.currentUser.id);
   }
 
 
@@ -197,10 +201,11 @@ handleCreateList = async(listName) => {
           path="/lists"
           render={routerProps => <ListPage 
           {...routerProps} 
-          callGetLists={this.callGetLists}
           user={this.state.currentUser}
           lists={this.state.lists}
-          handleCreateList={this.handleCreateList}/>} 
+          handleCreateList={this.handleCreateList}
+          selectedList={this.state.selectedList}
+          setSelectedList={this.setSelectedList}/>} 
         />
         <Route 
           path="/browse"
@@ -213,7 +218,9 @@ handleCreateList = async(listName) => {
             lastExposureDates={this.state.lastExposureDates}
             handleAddFood={this.handleAddFood}
             callGetAllFood={this.callGetAllFood}
-            allFood={this.state.allFood}/>} 
+            allFood={this.state.allFood}
+            lists={this.state.lists}
+            setSelectedList={this.setSelectedList}/>} 
         />
         <Route
           path="/account"
