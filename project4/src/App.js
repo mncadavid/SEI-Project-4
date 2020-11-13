@@ -94,7 +94,7 @@ class App extends Component {
   handleAddToList = async (e,food) => {
     e.preventDefault();
     console.log(`${food}`);
-    const lists = await addFoodToList(this.state.selectedList.id,food.id);
+    const lists = await addFoodToList(this.state.selectedList.id,food.id,this.state.currentUser.id);
     this.setState({
       lists
     })

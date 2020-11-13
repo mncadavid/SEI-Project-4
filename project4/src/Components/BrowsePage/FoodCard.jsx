@@ -32,7 +32,8 @@ class FoodCard extends Component{
                 </h2>
                 <FileSearchOutlined onClick={(e) => {this.props.handleOpenFood(e,this.props.food.id,this.props.currentUser.child_id)}}/>
                 <p>{this.props.lastExposureDate}</p>
-                <button onClick={(e)=> {this.props.handleOpenAddToListModal(e,this.props.food)}}>
+                <button 
+                    onClick={(e)=>{this.props.handleOpenAddToListModal(e,this.props.food)}}>
                     Add to grocery list
                 </button>
             </div>
