@@ -13,7 +13,7 @@ function ListConfigPane(props){
             <Input />
             <Button>Update List Name</Button> <br />
             <Link to="/browse"><Button>Browse for Food</Button></Link> <br />
-            <Button>Clear List</Button><br />
+            {/* <Button>Clear List</Button><br /> */}
             <Button>Email My List</Button>
             <p>See Another List</p>
             <ListsContainer 
@@ -23,6 +23,8 @@ function ListConfigPane(props){
             <p>New List Name:</p>
             <Input name="name" onChange={(e) => {setCreateListName(e.target.value)}}/>
             <Button onClick={(e) => {e.preventDefault(); props.handleCreateList(createListName)}}>Create List</Button>
+            <br />
+            <Button onClick={(e) => {props.handleDeleteList(e)}}>Delete Selected List</Button>
         </div>
     )
 }

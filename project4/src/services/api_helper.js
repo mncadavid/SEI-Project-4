@@ -76,3 +76,12 @@ export const createList = async(listName,userId) => {
     const resp = await api.post(`/lists/create`, listObject);
     return resp.data;
 }
+
+export const deleteList = async(list) => {
+    const resp = await api.post('/lists/delete',list); 
+    return resp.data;  
+}
+
+export const addFoodToList = async(listId,foodId) => {
+
+}

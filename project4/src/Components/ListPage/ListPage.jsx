@@ -7,9 +7,10 @@ function ListPage(props){
         return(
             <div className="list-page">
                 <ListConfigPane
-                    lists={this.props.lists} 
+                    lists={props.lists} 
                     handleCreateList={props.handleCreateList}
-                    setSelectedList={props.setSelectedList}/>
+                    setSelectedList={props.setSelectedList}
+                    handleDeleteList={props.handleDeleteList}/>
                 <List selectedList={props.selectedList}/>
                 <ListFoodCard />
             </div>

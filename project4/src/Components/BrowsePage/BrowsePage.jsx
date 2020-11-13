@@ -10,13 +10,15 @@ class BrowsePage extends Component{
         super(props);
 
         this.state={
-            openAddToListModal: false
+            openAddToListModal: false,
+            selectedFood: {}
         }
     }
     handleOpenAddToListModal = (e,food) => {
         e.preventDefault();
         this.setState({
-            openAddToListModal: true
+            openAddToListModal: true,
+            selectedFood: food
         })
     }
     closeAddToListModal = () => {
@@ -34,7 +36,9 @@ class BrowsePage extends Component{
                     lists={this.props.lists}
                     openAddToListModal={this.state.openAddToListModal}
                     setSelectedList={this.props.setSelectedList}
-                    closeAddToListModal={this.closeAddToListModal}/>}
+                    closeAddToListModal={this.closeAddToListModal}
+                    handleAddToList={this.props.handleAddToList}
+                    selectedFood={this.state.selectedFood}/>}
                 <div className="search">
                     <Input/>
                     <button>Search</button>
@@ -44,7 +48,6 @@ class BrowsePage extends Component{
                     <CardContainer 
                         foods={this.props.allFood}
                         handleOpenFood={this.props.handleOpenFood}
-                        handleAddToList={this.props.handleAddToList}
                         currentUser={this.props.currentUser}
                         callGetLastExposure={this.props.callGetLastExposure}
                         lastExposureDates={this.props.lastExposureDates}

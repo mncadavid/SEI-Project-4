@@ -12,7 +12,6 @@ function CardContainer(props){
                         food={food}
                         key={index}
                         handleOpenFood={props.handleOpenFood}
-                        handleAddToList={props.handleAddToList}
                         className={gridClass}
                         currentUser={props.currentUser}
                         callGetLastExposure={props.callGetLastExposure}

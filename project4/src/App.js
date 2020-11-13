@@ -7,7 +7,7 @@ import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
 import { loginUser, registerUser, verifyUser, getFoodData, addExposure, getLastExposure } from './services/api_helper';
-import {getAllFood, addFood, getLists,createList} from './services/api_helper';
+import {getAllFood, addFood, getLists,createList, addFoodToList, deleteList} from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 
@@ -93,10 +93,10 @@ class App extends Component {
       })
     }
   }
-
   handleAddToList = async (e,food) => {
     e.preventDefault();
     console.log(`${food}`);
+    const lists = await addFoodToList(this.state.selectedList.id,food.id);
   }
   handleAddExposure = async (e,exposure) => {
     e.preventDefault();
@@ -165,6 +165,16 @@ handleCreateList = async(listName) => {
     lists
   })
 }
+handleDeleteList = async(e) => {
+  e.preventDefault();
+  let listInfo = this.state.selectedList;
+  listInfo.userId = this.state.currentUser.id;
+  const lists = await deleteList(listInfo);
+  this.setState({
+    lists: lists,
+    selectedList: []
+  })
+}
 setSelectedList = (list) => {
   this.setState({
       selectedList: list
@@ -205,7 +215,8 @@ setSelectedList = (list) => {
           lists={this.state.lists}
           handleCreateList={this.handleCreateList}
           selectedList={this.state.selectedList}
-          setSelectedList={this.setSelectedList}/>} 
+          setSelectedList={this.setSelectedList}
+          handleDeleteList={this.handleDeleteList}/>} 
         />
         <Route 
           path="/browse"
