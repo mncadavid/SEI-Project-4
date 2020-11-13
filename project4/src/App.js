@@ -96,7 +96,8 @@ class App extends Component {
     console.log(`${food}`);
     const lists = await addFoodToList(this.state.selectedList.id,food.id,this.state.currentUser.id);
     this.setState({
-      lists
+      lists,
+      selectedList: []
     })
   }
   handleAddExposure = async (e,exposure) => {
