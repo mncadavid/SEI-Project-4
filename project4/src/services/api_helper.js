@@ -65,6 +65,7 @@ export const addExposure = async(exposure) => {
 
 export const getLists = async(userId) => {
     const resp = await api.get(`/lists/${userId}`);
+    console.log(resp)
     return resp.data.GroceryLists;
 }
 export const createList = async(listName,userId) => {

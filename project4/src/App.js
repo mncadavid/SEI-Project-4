@@ -153,6 +153,8 @@ handleAddFood = async (e,newFood) => {
 
 callGetLists = async (userId) => {
   const lists = await getLists(userId);
+  console.log(`Lists:`)
+  console.log(lists);
   this.setState({
     lists
   })
