@@ -4,7 +4,7 @@ import ExposuresContainer from './ExposuresContainer';
 
 function FoodModal(props){
     return(
-        <div className="food-modal-container" onClick={(e)=>props.handleCloseFood(e)}>
+        <div className="modal-container" onClick={(e)=>props.handleCloseFood(e)}>
             <div className="food-modal">
                 <h2>{props.foodData.food}</h2>
                 <div className="food-modal-lower">

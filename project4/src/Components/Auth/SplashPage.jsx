@@ -27,8 +27,8 @@ function SplashPage(props){
                         setOpenSignUp(true);
                     }}>Sign Up</Button>
             </div>
-            {openLogin && <LogInModal handleLogin={props.handleLogin}/>}
-            {openSignUp && <SignUpModal handleSignUp={props.handleSignUp}/>}
+            {openLogin && <LogInModal handleLogin={props.handleLogin} setOpenLogin={setOpenLogin}/>}
+            {openSignUp && <SignUpModal handleSignUp={props.handleSignUp} setOpenSignUp={setOpenSignUp}/>}
         </div>
     )
 }

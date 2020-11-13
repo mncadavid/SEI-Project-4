@@ -158,7 +158,7 @@ handleAddFood = async (e,newFood) => {
   render(){
     return (
       <div className="App body">
-        <Header handleLogout={this.handleLogout}/>
+        {!this.state.currentUser && <Header handleLogout={this.handleLogout}/>}
         {this.state.openFood && 
           <FoodModal 
             handleCloseFood={this.handleCloseFood}

@@ -66,7 +66,7 @@
     border-radius: 10px;
     margin: 20px;
 }
-.food-modal-container{
+.modal-container{
     z-index: 1;
     position: absolute;
     height: 100vh;
@@ -195,4 +195,16 @@
     width: 100vw;
     height: 75vh;
     text-align: center;
+}
+.login-modal{
+    background-color: #AAF683;
+    border: solid #60D394;
+    border-radius: 10px;
+    padding: 10px;
+}
+.sign-up-modal{
+    background-color: #AAF683;
+    border: solid #60D394; 
+    border-radius: 10px;
+    padding: 10px;
 }

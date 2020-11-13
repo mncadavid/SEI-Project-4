@@ -2,7 +2,6 @@ import React from 'react';
 
 
 function AccountPage(props){
-    console.log(props.user);
     return(
         <div className="account-page">
             <h2>Hello, {props.user.name}!</h2>

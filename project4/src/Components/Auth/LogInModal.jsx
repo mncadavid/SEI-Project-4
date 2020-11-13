@@ -19,26 +19,28 @@ class LogInModal extends Component{
 
     render(){
         return(
-            <div className="log-in-modal">
-                <form onSubmit = {(e) => this.props.handleLogin(e,this.state)}>
-                    <h2>Log In</h2>
-                    <p>Username:</p>
-                    <input
-                        type="text"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.handleChange}
-                    />
-                    <p>Password:</p>
-                    <input
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    />
-                    <br /><br/>
-                    <input type="submit" value="Log In"/>
-                </form>
+            <div className="modal-container" onClick={(e) => {if(e.currentTarget===e.target){this.props.setOpenLogin(false)}}}>
+                <div className="login-modal">
+                    <form onSubmit = {(e) => this.props.handleLogin(e,this.state)}>
+                        <h2>Log In</h2>
+                        <p>Username:</p>
+                        <input
+                            type="text"
+                            name="username"
+                            value={this.state.username}
+                            onChange={this.handleChange}
+                        />
+                        <p>Password:</p>
+                        <input
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                        />
+                        <br /><br/>
+                        <input type="submit" value="Log In"/>
+                    </form>
+                </div>
             </div>
         )
     }
