@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 
 
 function ListConfigPane(props){
-    console.log(props);
     const [createListName, setCreateListName] = useState(null);
     return(
         <div className="list-config-pane">

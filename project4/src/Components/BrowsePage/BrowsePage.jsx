@@ -28,6 +28,7 @@ class BrowsePage extends Component{
     }
     componentDidMount(){
         this.props.callGetAllFood();
+        this.props.callGetLists();
     }
     render(){
         return(

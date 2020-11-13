@@ -29,11 +29,9 @@ class App extends Component {
   }
   handleSignUp = async(e,registerData) => {
     e.preventDefault();
-    console.log(`RegisterData: ${registerData}`)
     const response = await registerUser(registerData);
     let currentUser = response.user;
     let currentChild = response.child;
-    console.log(`Current User: ${currentUser}`)
     this.setState({
       currentUser,
       currentChild
@@ -97,6 +95,9 @@ class App extends Component {
     e.preventDefault();
     console.log(`${food}`);
     const lists = await addFoodToList(this.state.selectedList.id,food.id);
+    this.setState({
+      lists
+    })
   }
   handleAddExposure = async (e,exposure) => {
     e.preventDefault();
@@ -152,7 +153,7 @@ handleAddFood = async (e,newFood) => {
   }
 }
 callGetLists = async (user_id) => {
-  const lists = await getLists(user_id);
+  const lists = await getLists(this.state.currentUser.id);
   console.log(`Lists:`)
   console.log(lists);
   this.setState({
@@ -181,8 +182,7 @@ setSelectedList = (list) => {
   })
 }
   async componentDidMount(){
-    console.log("mounted")
-    const verifyDone = await this.handleVerify();
+    await this.handleVerify();
   }
 
 
@@ -230,7 +230,8 @@ setSelectedList = (list) => {
             callGetAllFood={this.callGetAllFood}
             allFood={this.state.allFood}
             lists={this.state.lists}
-            setSelectedList={this.setSelectedList}/>} 
+            setSelectedList={this.setSelectedList}
+            callGetLists={this.callGetLists}/>} 
         />
         <Route
           path="/account"

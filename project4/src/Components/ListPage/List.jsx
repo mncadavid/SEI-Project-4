@@ -9,17 +9,17 @@ function List(props){
                 <ul>
                     <li>Fruits
                         <ul>
-                        {props.selectedList.Food.filter((food)=> food.category==="Fruit")}
+                        {props.selectedList.food.filter((food)=> food.category==="Fruit")}
                         </ul>
                     </li>
                     <li>Vegetables
                         <ul>
-                        {props.selectedList.Food.filter((food)=> food.category==="Vegetable")}
+                        {props.selectedList.food.filter((food)=> food.category==="Vegetable")}
                         </ul>
                     </li>
                     <li>Meat
                         <ul>
-                        {props.selectedList.Food.filter((food)=> food.category==="Meat")}
+                        {props.selectedList.food.filter((food)=> food.category==="Meat")}
                         </ul>
                     </li>
                 </ul>
