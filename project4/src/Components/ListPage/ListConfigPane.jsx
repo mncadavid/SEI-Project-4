@@ -16,7 +16,9 @@ function ListConfigPane(props){
             <Button>Clear List</Button><br />
             <Button>Email My List</Button>
             <p>See Another List</p>
-            <ListsContainer lists={props.lists}/>
+            <ListsContainer 
+                lists={props.lists}
+                setSelectedList={props.setSelectedList}/>
             <br />
             <p>New List Name:</p>
             <Input name="name" onChange={(e) => {setCreateListName(e.target.value)}}/>

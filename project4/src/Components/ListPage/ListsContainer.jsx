@@ -6,7 +6,7 @@ function ListsContainer(props){
     return(
         <div className="lists-container">
             {props.lists.map((list,index) => {
-                return <ListTitleTag key={index} list={list}/>
+                return <ListTitleTag key={index} list={list} setSelectedList={props.setSelectedList}/>
             })}
         </div>
     )
