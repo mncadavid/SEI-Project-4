@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Input} from 'antd';
+import {categories} from '../../categories';
 
 
 class AddFood extends Component{
@@ -19,6 +20,7 @@ class AddFood extends Component{
     }
     
     render(){
+      console.log(categories);
       return(
           <div className="add-food">
               <form onSubmit={(e) => this.props.handleAddFood(e,this.state)}>
@@ -27,9 +29,10 @@ class AddFood extends Component{
                   <Input name="name" onChange={(e) => this.handleChange(e)}/>
                   <p>Category:</p>
                   <select name="category" onChange = {(e) => this.handleChange(e)}>
-                      <option value="Fruit">Fruit</option>
-                      <option value="Vegetable">Vegetable</option>
-                      <option value="Meat">Meat</option>
+                      <option value="" disabled selected>Choose Category</option>
+                      {categories.map((category,index) => {
+                        return <option key={index} value={category}>{category}</option>
+                      })}
                   </select>
                   <br />
                   <button type="submit">Add Food</button>

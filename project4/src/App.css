@@ -151,6 +151,9 @@
     width: 100vw;
     height: 80vh;
 }
+.list-food-card-placeholder{
+    width: 265px;
+}
 .list-food-card{
     display: flex;
     flex-direction: column;

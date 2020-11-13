@@ -1,0 +1,1 @@
+export const categories = ["Fruit","Vegetable","Meat & Seafood","Dairy","Spices","Drinks","Grains","Cooler","Dry Goods","Snacks","Condiments","Baking","Canned Foods","Bakery","Freezer"];
