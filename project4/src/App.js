@@ -10,6 +10,7 @@ import { loginUser, registerUser, verifyUser, getFoodData, addExposure, getLastE
 import {getAllFood, addFood, getLists,createList, addFoodToList, deleteList,removeFood} from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
+import emailjs, {init} from 'emailjs-com';
 
 
 class App extends Component {
@@ -189,9 +190,23 @@ handleRemoveFood = async(food) => {
   })
   this.setSelectedList(selectedListId);
 }
-  async componentDidMount(){
-    await this.handleVerify();
+sendGroceryListEmail = () => {
+  const templateParams = {
+    to_name: "Juan",
+    message: "Whole Foods List"
   }
+  emailjs.send('service_eilq6oq','template_ul2h0hv', templateParams)
+  .then(response => {
+    console.log('Success!', response.status, response.text);
+  })
+  .catch(err => {
+    console.log('Failed',err);
+  })
+}
+async componentDidMount(){
+  await this.handleVerify();
+  init("user_LxVURALYlGpU0sNoWHfw9");
+}
 
 
   render(){
@@ -224,7 +239,8 @@ handleRemoveFood = async(food) => {
           selectedList={this.state.selectedList}
           setSelectedList={this.setSelectedList}
           handleDeleteList={this.handleDeleteList}
-          handleRemoveFood={this.handleRemoveFood}/>} 
+          handleRemoveFood={this.handleRemoveFood}
+          sendGroceryListEmail={this.sendGroceryListEmail}/>} 
         />
         <Route 
           path="/browse"

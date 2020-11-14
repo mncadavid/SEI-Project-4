@@ -12,8 +12,7 @@ function ListConfigPane(props){
             <Input />
             <Button>Update List Name</Button> <br />
             <Link to="/browse"><Button>Browse for Food</Button></Link> <br />
-            {/* <Button>Clear List</Button><br /> */}
-            <Button>Email My List</Button>
+            <Button onClick={(e)=> {e.preventDefault(); props.sendGroceryListEmail();}}>Email My List</Button>
             <p>See Another List</p>
             <ListsContainer 
                 lists={props.lists}

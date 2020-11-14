@@ -11,7 +11,8 @@ function ListPage(props){
                     lists={props.lists} 
                     handleCreateList={props.handleCreateList}
                     setSelectedList={props.setSelectedList}
-                    handleDeleteList={props.handleDeleteList}/>
+                    handleDeleteList={props.handleDeleteList}
+                    sendGroceryListEmail={props.sendGroceryListEmail}/>
                 <List selectedList={props.selectedList} setSelectedFood={setSelectedFood}/>
                 <ListFoodCard 
                     selectedFood={selectedFood} 
