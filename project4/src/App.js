@@ -7,7 +7,7 @@ import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
 import { loginUser, registerUser, verifyUser, getFoodData, addExposure, getLastExposure } from './services/api_helper';
-import {getAllFood, addFood, getLists,createList, addFoodToList, deleteList} from './services/api_helper';
+import {getAllFood, addFood, getLists,createList, addFoodToList, deleteList,removeFood} from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 
@@ -177,10 +177,19 @@ handleDeleteList = async(e) => {
     selectedList: []
   })
 }
-setSelectedList = (list) => {
+setSelectedList = (list_id) => {
+  let list = this.state.lists.filter(x=>x.id===list_id);
   this.setState({
-      selectedList: list
+      selectedList: list[0]
   })
+}
+handleRemoveFood = async(food) => {
+  const lists = await removeFood(food);
+  let selectedListId = this.state.selectedList.id;
+  this.setState({
+    lists
+  })
+  this.setSelectedList(selectedListId);
 }
   async componentDidMount(){
     await this.handleVerify();
@@ -216,7 +225,8 @@ setSelectedList = (list) => {
           handleCreateList={this.handleCreateList}
           selectedList={this.state.selectedList}
           setSelectedList={this.setSelectedList}
-          handleDeleteList={this.handleDeleteList}/>} 
+          handleDeleteList={this.handleDeleteList}
+          handleRemoveFood={this.handleRemoveFood}/>} 
         />
         <Route 
           path="/browse"

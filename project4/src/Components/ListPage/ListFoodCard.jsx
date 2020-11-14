@@ -9,7 +9,8 @@ function ListFoodCard(props){
                     <h3>{props.selectedFood.name}</h3>
                     {/* <p>Quantity: 3</p> */}
                     <p>Last Exposure: Nov. 7</p>
-                    <Button>Remove from List</Button>
+                    <Button
+                    onClick={(e)=>{e.preventDefault();props.setSelectedFood(null);props.handleRemoveFood(props.selectedFood)}}>Remove from List</Button>
                 </div>
             }
         </div>

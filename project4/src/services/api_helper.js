@@ -83,5 +83,9 @@ export const addFoodToList = async(list_id,food_id,user_id) => {
         user_id
     }
     const resp = await api.post('/lists/add',body);
-    return resp.data
+    return resp.data;
+}
+export const removeFood = async(food) => {
+    const resp = await api.post('/lists/remove',food.grocerylistsfood);
+    return resp.data;
 }

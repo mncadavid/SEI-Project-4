@@ -13,7 +13,10 @@ function ListPage(props){
                     setSelectedList={props.setSelectedList}
                     handleDeleteList={props.handleDeleteList}/>
                 <List selectedList={props.selectedList} setSelectedFood={setSelectedFood}/>
-                <ListFoodCard selectedFood={selectedFood}/>
+                <ListFoodCard 
+                    selectedFood={selectedFood} 
+                    handleRemoveFood={props.handleRemoveFood}
+                    setSelectedFood={setSelectedFood}/>
             </div>
         )
 }
