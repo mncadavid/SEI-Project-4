@@ -19,7 +19,7 @@ function ListConfigPane(props){
                 setSelectedList={props.setSelectedList}/>
             <br />
             <p>New List Name:</p>
-            <Input name="name" onChange={(e) => {setCreateListName(e.target.value)}}/>
+            <Input required name="name" onChange={(e) => {setCreateListName(e.target.value)}}/>
             <Button onClick={(e) => {e.preventDefault(); props.handleCreateList(createListName)}}>Create List</Button>
             <br />
             <Button onClick={(e) => {props.handleDeleteList(e)}}>Delete Selected List</Button>

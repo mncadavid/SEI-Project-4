@@ -11,7 +11,9 @@ class BrowsePage extends Component{
 
         this.state={
             openAddToListModal: false,
-            selectedFood: {}
+            selectedFood: {},
+            categoryFilter: "All",
+            foods: this.props.allFood
         }
     }
     handleOpenAddToListModal = (e,food) => {
@@ -26,6 +28,20 @@ class BrowsePage extends Component{
             openAddToListModal: false
         })
     }
+    filterFoods = (filter) => {
+        if(filter === "All"){
+            this.setState({
+                foods: this.props.allFood
+            })
+        }
+        else{
+            let filteredFoods = this.props.allFood.filter(food => food.category === filter);
+            this.setState({
+                foods: filteredFoods
+            })
+        }
+    }
+
     componentDidMount(){
         this.props.callGetAllFood();
         this.props.callGetLists();
@@ -40,14 +56,14 @@ class BrowsePage extends Component{
                     closeAddToListModal={this.closeAddToListModal}
                     handleAddToList={this.props.handleAddToList}
                     selectedFood={this.state.selectedFood}/>}
-                <div className="search">
+                {/* <div className="search">
                     <Input/>
                     <button>Search</button>
-                </div>
+                </div> */}
                 <div className="browse-lower">
-                    <FilterPane />
+                    <FilterPane filterFoods={this.filterFoods}/>
                     <CardContainer 
-                        foods={this.props.allFood}
+                        foods={this.state.foods}
                         handleOpenFood={this.props.handleOpenFood}
                         currentUser={this.props.currentUser}
                         callGetLastExposure={this.props.callGetLastExposure}

@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class LogInModal extends Component{
     constructor(props){
         super(props);
-
         this.state={
             username: "",
             password: ""
@@ -25,6 +24,7 @@ class LogInModal extends Component{
                         <h2>Log In</h2>
                         <p>Username:</p>
                         <input
+                            required
                             type="text"
                             name="username"
                             value={this.state.username}
@@ -32,6 +32,7 @@ class LogInModal extends Component{
                         />
                         <p>Password:</p>
                         <input
+                            required
                             type="password"
                             name="password"
                             value={this.state.password}
