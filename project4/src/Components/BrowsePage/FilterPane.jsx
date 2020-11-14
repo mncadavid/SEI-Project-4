@@ -4,7 +4,7 @@ import {categories} from '../../categories';
 function FilterPane(props){
     return(
         <div className="filter-pane">
-            <p>Filter by Category:</p>
+            <h3>Filter by Category</h3>
                 <select required name="category" onChange={(e)=>props.filterFoods(e.target.value)}>
                       <option value="All" selected>All Foods</option>
                       {categories.map((category,index) => {

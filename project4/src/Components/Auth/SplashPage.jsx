@@ -8,7 +8,7 @@ function SplashPage(props){
     const [openSignUp, setOpenSignUp] = useState(false);
     return(
         <div className="splash-page">
-            <h1>Food Folio</h1>
+            <h1>Picky Preventer</h1>
             <img className="splash-image" src="./food-clipart.png" alt="Logo"/>
             <div>
                 <Button 

@@ -10,6 +10,7 @@
     margin: 0px;
     padding: 10px 20px;
     height: 15vh;
+    min-height: 85px;
     background-color: #FFD97D;
     align-items: center;
 
@@ -40,8 +41,10 @@
     flex-direction: column;
 }
 .splash-image{
-    height: 30%;
-    width: 30%;
+    max-width: 400px;
+    max-height: 400px;
+    height: auto;
+    width: auto;
     margin: 10px auto;
 }
 .auth-button{
@@ -178,9 +181,17 @@
 }
 
 .filter-pane{
-    border: solid black;
+    background-color: #FF9B85;
+    border: solid #EE6055;
+    border-radius: 10px;
+    margin: 20px auto;
+    padding: 5px;
     width: 20%;
     height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .browse-page{
@@ -209,12 +220,31 @@
     border: solid #60D394;
     border-radius: 10px;
     padding: 10px;
+    width: 20vw;
+    min-width: 165px;
+
+}
+.login-modal h2{
+    text-align: center;
+}
+.login-modal input{
+    display: block;
+    margin: 0 auto;
 }
 .sign-up-modal{
     background-color: #AAF683;
     border: solid #60D394; 
     border-radius: 10px;
     padding: 10px;
+    width: 20vw;
+    min-width: 165px;
+}
+.sign-up-modal h2{
+    text-align: center;
+}
+.sign-up-modal input{
+    display: block;
+    margin: 0 auto;
 }
 .add-to-list-modal{
     background-color: #AAF683;

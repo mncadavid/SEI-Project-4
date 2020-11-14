@@ -33,7 +33,7 @@ class AddFood extends Component{
                         return <option key={index} value={category}>{category}</option>
                       })}
                   </select>
-                  <br />
+                  <br /><br />
                   <button type="submit">Add Food</button>
               </form>
           </div>
