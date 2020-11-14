@@ -20,7 +20,6 @@ class AddFood extends Component{
     }
     
     render(){
-      console.log(categories);
       return(
           <div className="add-food">
               <form onSubmit={(e) => this.props.handleAddFood(e,this.state)}>

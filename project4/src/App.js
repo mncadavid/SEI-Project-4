@@ -93,7 +93,7 @@ class App extends Component {
   }
   handleAddToList = async (e,food) => {
     e.preventDefault();
-    console.log(`${food}`);
+
     const lists = await addFoodToList(this.state.selectedList.id,food.id,this.state.currentUser.id);
     this.setState({
       lists,
@@ -155,8 +155,6 @@ handleAddFood = async (e,newFood) => {
 }
 callGetLists = async (user_id) => {
   const lists = await getLists(this.state.currentUser.id);
-  console.log(`Lists:`)
-  console.log(lists);
   this.setState({
     lists
   })
