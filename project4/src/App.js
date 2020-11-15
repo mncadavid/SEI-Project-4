@@ -240,7 +240,8 @@ async componentDidMount(){
           setSelectedList={this.setSelectedList}
           handleDeleteList={this.handleDeleteList}
           handleRemoveFood={this.handleRemoveFood}
-          sendGroceryListEmail={this.sendGroceryListEmail}/>} 
+          sendGroceryListEmail={this.sendGroceryListEmail}
+          callGetLists={this.callGetLists}/>} 
         />
         <Route 
           path="/browse"

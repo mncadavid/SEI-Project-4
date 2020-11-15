@@ -5,6 +5,9 @@ import ListFoodCard from './ListFoodCard';
 
 function ListPage(props){
     const [selectedFood, setSelectedFood] = useState(null);
+    if(props.lists.length === 0){
+        props.callGetLists();
+    }
         return(
             <div className="list-page">
                 <ListConfigPane

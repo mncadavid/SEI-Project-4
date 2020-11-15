@@ -18,6 +18,7 @@ class BrowsePage extends Component{
     }
     handleOpenAddToListModal = (e,food) => {
         e.preventDefault();
+        this.props.callGetLists();
         this.setState({
             openAddToListModal: true,
             selectedFood: food
@@ -44,7 +45,6 @@ class BrowsePage extends Component{
 
     componentDidMount(){
         this.props.callGetAllFood();
-        this.props.callGetLists();
     }
     render(){
         return(
