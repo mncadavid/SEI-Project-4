@@ -132,7 +132,7 @@ class App extends Component {
       let lastExposureDatesCopy = this.state.lastExposureDates;
       lastExposureDatesCopy[food_id] = `New Food`;
       this.setState({
-          lastExposureDate: lastExposureDatesCopy
+          lastExposureDates: lastExposureDatesCopy
       })
     }
 }
@@ -144,6 +144,7 @@ callGetAllFood = async () => {
           allFood: foods.data
       })
   }
+  return foods.data
 }
 handleAddFood = async (e,newFood) => {
   e.preventDefault();
@@ -241,7 +242,8 @@ async componentDidMount(){
           handleDeleteList={this.handleDeleteList}
           handleRemoveFood={this.handleRemoveFood}
           sendGroceryListEmail={this.sendGroceryListEmail}
-          callGetLists={this.callGetLists}/>} 
+          callGetLists={this.callGetLists}
+          lastExposureDates={this.state.lastExposureDates}/>} 
         />
         <Route 
           path="/browse"

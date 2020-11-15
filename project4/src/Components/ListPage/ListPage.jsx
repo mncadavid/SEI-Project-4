@@ -21,7 +21,8 @@ function ListPage(props){
                 <ListFoodCard 
                     selectedFood={selectedFood} 
                     handleRemoveFood={props.handleRemoveFood}
-                    setSelectedFood={setSelectedFood}/>
+                    setSelectedFood={setSelectedFood}
+                    lastExposureDates={props.lastExposureDates}/>
             </div>
         )
 }

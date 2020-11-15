@@ -7,7 +7,6 @@ function CardContainer(props){
             {props.foods && props.foods.map((food,index) => {
                 let gridClass = "";
                 let food_id = food.id;
-                // {index%2 == 0 ? gridClass = "grid-right" : gridClass = "grid-left"};
                return <FoodCard 
                         food={food}
                         key={index}

@@ -28,7 +28,7 @@ class AddFood extends Component{
                   <Input required name="name" onChange={(e) => this.handleChange(e)}/>
                   <p>Category:</p>
                   <select required name="category" onChange = {(e) => this.handleChange(e)}>
-                      <option value="" disabled selected>Choose Category</option>
+                      <option value="" disabled defaultValue>Choose Category</option>
                       {categories.map((category,index) => {
                         return <option key={index} value={category}>{category}</option>
                       })}

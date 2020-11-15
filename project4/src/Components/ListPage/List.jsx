@@ -12,7 +12,7 @@ function List(props){
                         return <li key={index}>{category}
                                     <ul>
                                         {props.selectedList.food.filter((food => food.category===category)).map((food,idx) => {
-                                            return <li key={idx} onClick={(e) => {props.setSelectedFood(food)}}>{food.name}</li>
+                                            return <li className="list-item" key={idx} onClick={(e) => {props.setSelectedFood(food)}}>{food.name}</li>
                                         })}
                                     </ul>
                                 </li>

@@ -43,8 +43,11 @@ class BrowsePage extends Component{
         }
     }
 
-    componentDidMount(){
-        this.props.callGetAllFood();
+    componentDidMount = async () => {
+        let allFood = await this.props.callGetAllFood();
+        this.setState({
+            foods: allFood
+        })
     }
     render(){
         return(
