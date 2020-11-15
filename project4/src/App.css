@@ -147,6 +147,7 @@
 .list-title-tag{
     border: solid black;
     text-align: center;
+    cursor: pointer;
 }
 .list-page{
     display: flex;
@@ -253,4 +254,7 @@
     padding: 10px;
     width: 20%;
     height: 20%;
+}
+.selected{
+    background-color: #AAF683;
 }

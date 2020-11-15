@@ -55,7 +55,8 @@ class BrowsePage extends Component{
                     setSelectedList={this.props.setSelectedList}
                     closeAddToListModal={this.closeAddToListModal}
                     handleAddToList={this.props.handleAddToList}
-                    selectedFood={this.state.selectedFood}/>}
+                    selectedFood={this.state.selectedFood}
+                    selectedList={this.props.selectedList}/>}
                 {/* <div className="search">
                     <Input/>
                     <button>Search</button>

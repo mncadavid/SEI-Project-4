@@ -256,7 +256,8 @@ async componentDidMount(){
             allFood={this.state.allFood}
             lists={this.state.lists}
             setSelectedList={this.setSelectedList}
-            callGetLists={this.callGetLists}/>} 
+            callGetLists={this.callGetLists}
+            selectedList={this.state.selectedList}/>} 
         />
         <Route
           path="/account"
