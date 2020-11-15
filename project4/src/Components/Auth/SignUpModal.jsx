@@ -28,6 +28,7 @@ class SignUpModal extends Component{
                         <h2>Sign Up</h2>
                         <p>Name:</p>
                         <input required
+                            autoFocus
                             type="text"
                             name="name"
                             value={this.state.name}

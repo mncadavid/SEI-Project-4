@@ -51,11 +51,15 @@
     margin: 5px;
 }
 .card-container{
-    overflow-y: scroll;
+    overflow: scroll;
     height: 71vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, 225px);
     grid-auto-flow: row dense;
+    width:40%;
+    min-width: 260px;
+    grid-gap: 10px;
+
 }
 .food-card{
     display: flex;
@@ -125,7 +129,7 @@
     border-radius: 10px;
     margin: 20px auto;
     padding: 5px 10px;
-    width: 20%;
+    width: 155px;
     height: 40%;
     min-width: 150px;
 }
@@ -133,6 +137,7 @@
     display: flex;
     flex-direction: column;
     width: 20%;
+    max-width: 210px;
     background-color: #FF9B85;
     border: solid #EE6055;
     border-radius: 10px;
@@ -175,6 +180,7 @@
     border: solid black;
     width: 50%;
     margin: 10px;
+    border-radius: 10px;
 }
 .list{
     width: 100%;
@@ -190,7 +196,7 @@
     border-radius: 10px;
     margin: 20px auto;
     padding: 5px;
-    width: 20%;
+    width: 155px;
     height: 40%;
     display: flex;
     flex-direction: column;
@@ -207,10 +213,11 @@
 }
 .browse-lower{
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     padding: 10px;
     height: 72vh;
     align-items: center;
+    width: 100vw;
 }
 .search{
     margin: 10px auto;
@@ -257,8 +264,10 @@
     border-radius: 10px;
     padding: 10px;
     width: 20%;
-    height: 20%;
+    min-width: 78px;
+    height: 30%;
+    min-height: 215px;
 }
 .selected{
-    background-color: #AAF683;
+    background-color:#60D394;
 }

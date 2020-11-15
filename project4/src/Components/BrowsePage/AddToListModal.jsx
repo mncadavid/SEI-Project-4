@@ -9,6 +9,7 @@ function AddToListModal(props){
                 {if(e.currentTarget===e.target)
                 {props.closeAddToListModal()}}}>
             <div className="add-to-list-modal">
+                <h3>Select list:</h3>
                 <ListsContainer lists={props.lists} setSelectedList={props.setSelectedList} selectedList={props.selectedList}/>
                 <br/>
                 <button onClick={(e)=> {props.handleAddToList(e,props.selectedFood);props.closeAddToListModal();}}>Add to List</button>

@@ -24,6 +24,7 @@ class LogInModal extends Component{
                         <h2>Log In</h2>
                         <p>Username:</p>
                         <input
+                            autoFocus
                             required
                             type="text"
                             name="username"
