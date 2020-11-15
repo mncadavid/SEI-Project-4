@@ -271,3 +271,14 @@
 .selected{
     background-color:#60D394;
 }
+.email-list-modal{
+    display: flex;
+    flex-direction: column;
+    background-color: #AAF683;
+    padding: 10px;
+    border: solid #60D394;
+    border-radius: 10px;
+    margin: 20px;
+    width: 70%;
+    text-align: center;
+}

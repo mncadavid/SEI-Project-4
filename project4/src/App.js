@@ -191,18 +191,20 @@ handleRemoveFood = async(food) => {
   })
   this.setSelectedList(selectedListId);
 }
-sendGroceryListEmail = () => {
+sendGroceryListEmail = (e,email) => {
+  e.preventDefault();
+  console.log(email)
   const templateParams = {
     to_name: "Juan",
     message: "Whole Foods List"
   }
-  emailjs.send('service_eilq6oq','template_ul2h0hv', templateParams)
-  .then(response => {
-    console.log('Success!', response.status, response.text);
-  })
-  .catch(err => {
-    console.log('Failed',err);
-  })
+  // emailjs.send('service_eilq6oq','template_ul2h0hv', templateParams)
+  // .then(response => {
+  //   console.log('Success!', response.status, response.text);
+  // })
+  // .catch(err => {
+  //   console.log('Failed',err);
+  // })
 }
 async componentDidMount(){
   await this.handleVerify();
