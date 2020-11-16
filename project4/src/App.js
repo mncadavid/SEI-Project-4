@@ -11,6 +11,7 @@ import {getAllFood, addFood, getLists,createList, addFoodToList, deleteList,remo
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 import emailjs, {init} from 'emailjs-com';
+import {categories} from './categories';
 
 
 class App extends Component {
@@ -200,19 +201,45 @@ handleRemoveFood = async(food) => {
 }
 sendGroceryListEmail = (e,email) => {
   e.preventDefault();
-  console.log(email)
+  // let list_items = "";
+  // categories.map(category => {
+  //   list_items += category;
+  //   list_items += '\n';
+  //   this.state.selectedList.food.filter((food => food.category===category)).map(food => {
+  //     list_items+= '\t';
+  //     list_items+= food.name;
+  //     list_items+= '\n';
+  //   })
+  // })
+
+  let list_items = "";
+
+  list_items+= `<h2>${this.state.selectedList.name}</h2>`;
+  list_items+= `<ul>`;
+  categories.map(category => {
+    list_items+= `<li>${category}<ul>`;
+      this.state.selectedList.food.filter((food => food.category===category)).map(food => {
+        list_items+=`<li>${food.name}</li>`;
+      })
+    list_items+='</ul></li>'
+      })
+  list_items+='</ul>';
+
   const templateParams = {
     to_name: "Juan",
-    message: "Whole Foods List"
+    list_name: this.state.selectedList.name,
+    list_items: list_items,
+    to_email: email.email
   }
-  // emailjs.send('service_eilq6oq','template_ul2h0hv', templateParams)
-  // .then(response => {
-  //   console.log('Success!', response.status, response.text);
-  // })
-  // .catch(err => {
-  //   console.log('Failed',err);
-  // })
+  emailjs.send('service_eilq6oq','template_ul2h0hv', templateParams)
+  .then(response => {
+    console.log('Success!', response.status, response.text);
+  })
+  .catch(err => {
+    console.log('Failed',err);
+  })
 }
+
 async componentDidMount(){
   await this.handleVerify();
   init("user_LxVURALYlGpU0sNoWHfw9");
