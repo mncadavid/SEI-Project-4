@@ -75,9 +75,11 @@ class BrowsePage extends Component{
                         callGetLastExposure={this.props.callGetLastExposure}
                         lastExposureDates={this.props.lastExposureDates}
                         handleOpenAddToListModal={this.handleOpenAddToListModal}
+                        serverErrorMessage={this.props.serverErrorMessage}
                     />
                     <AddFood 
-                        handleAddFood={this.props.handleAddFood}/>
+                        handleAddFood={this.props.handleAddFood}
+                        serverErrorMessage={this.props.serverErrorMessage}/>
                 </div>
             </div>
         )

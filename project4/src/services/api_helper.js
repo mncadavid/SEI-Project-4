@@ -20,7 +20,7 @@ export const loginUser = async(loginData) => {
 }
 export const verifyUser = async () => {
     const token = localStorage.getItem('authToken');
-    if(token){
+    if(token && token !== 'undefined'){
         api.defaults.headers.common.authorization = `Bearer ${token}`;
         const resp = await api.get('/auth/verify');
         return resp.data;
@@ -92,6 +92,5 @@ export const removeFood = async(food) => {
 
 export const sendListText = async(textObject) => {
     const resp = await api.post('/lists/sendtext', textObject);
-    console.log(resp);
     return resp;
 }

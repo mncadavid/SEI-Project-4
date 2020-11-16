@@ -44,7 +44,8 @@ class AddFood extends Component{
           <div className="add-food">
               <form onSubmit={(e) => this.handleErrorHandling(e)}>
                   <h3>Add a Food</h3>
-                  {this.state.errorMessage}
+                  <p className="error-message">{this.state.errorMessage}</p>
+                  <p className="error-message">{this.props.serverErrorMessage.includes('exists') && this.props.serverErrorMessage}</p>
                   <p>Name:</p>
                   <Input required name="name" onChange={(e) => this.handleChange(e)}/>
                   <p>Category:</p>

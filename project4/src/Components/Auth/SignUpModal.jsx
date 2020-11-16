@@ -67,6 +67,7 @@ class SignUpModal extends Component{
                     <form onSubmit = {(e) => this.handleInputErrors(e)}>
                         <h2>Sign Up</h2>
                         <p className="error-message">{this.state.errorMessage}</p>
+                        <p className="error-message">{this.props.serverErrorMessage}</p>
                         <p>Name:</p>
                         <input required
                             autoFocus

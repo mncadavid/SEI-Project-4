@@ -26,42 +26,61 @@ class App extends Component {
       allFood: null,
       currentChild: null,
       lists: [],
-      selectedList: []
+      selectedList: [],
+      serverErrorMessage: ""
     }
   }
   handleSignUp = async(registerData) => {
     const response = await registerUser(registerData);
-    let currentUser = response.user;
-    let currentChild = response.child;
-    this.setState({
-      currentUser,
-      currentChild
-    })
-    this.props.history.push('/browse');
-
+    if(!response.user){
+      this.setState({
+        serverErrorMessage: response
+      })
+    }
+    else{
+      let currentUser = response.user;
+      let currentChild = response.child;
+      this.setState({
+        currentUser,
+        currentChild,
+        serverErrorMessage: ""
+      })
+      this.props.history.push('/browse');
+    }
   }
   handleLogin = async (loginData) => {
     const resp = await loginUser(loginData);
-    let currentUser = {
-      name: resp.name,
-      username: resp.username,
-      id: resp.id,
-      child_id: resp.child_id
+    if(!resp.name){
+      this.setState({
+        serverErrorMessage: resp
+      })
     }
-    let currentChild = {
-      name: resp.children[0].name,
-      age: resp.children[0].age
+    else{
+      let currentUser = {
+        name: resp.name,
+        username: resp.username,
+        id: resp.id,
+        child_id: resp.child_id
+      }
+      let currentChild = {
+        name: resp.children[0].name,
+        age: resp.children[0].age
+      }
+      this.setState({
+        currentUser,
+        currentChild,
+        serverErrorMessage: ""
+      })
+      this.props.history.push('/browse');
     }
-    this.setState({
-      currentUser,
-      currentChild
-    })
-    this.props.history.push('/browse');
   }
 
   handleVerify = async () => {
     const currentUser = await verifyUser();
-    if(currentUser){
+    if(currentUser && !currentUser.id){
+      console.log(currentUser);
+    }
+    else if(currentUser){
       this.setState({
         currentUser,
         currentChild: currentUser.children[0]
@@ -99,12 +118,20 @@ class App extends Component {
   }
   handleAddToList = async (e,food) => {
     e.preventDefault();
-
     const lists = await addFoodToList(this.state.selectedList.id,food.id,this.state.currentUser.id);
-    this.setState({
-      lists,
-      selectedList: []
-    })
+    console.log(lists);
+    if((typeof lists) === 'string'){
+      this.setState({
+        serverErrorMessage: lists
+      })
+    }
+    else{
+      this.setState({
+        lists,
+        selectedList: [],
+        serverErrorMessage: ""
+      })
+    }
   }
   handleAddExposure = async (e,exposure) => {
     e.preventDefault();
@@ -153,9 +180,15 @@ callGetAllFood = async () => {
 }
 handleAddFood = async (newFood) => {
   const allFoodsPlusNew = await addFood(newFood);
-  if(allFoodsPlusNew){
+  if(allFoodsPlusNew && (typeof allFoodsPlusNew.data) === "string"){
+    this.setState({
+      serverErrorMessage: allFoodsPlusNew.data
+    })
+  }
+  else if(allFoodsPlusNew){
       this.setState({
-          allFood: allFoodsPlusNew.data
+          allFood: allFoodsPlusNew.data,
+          serverErrorMessage: ""
       })
   }
 }
@@ -244,6 +277,7 @@ handleSendText = async(e,phoneNumber) => {
   this.state.selectedList.food.map(food => {
     message += food.name;
     message += '\n';
+    return true;
   })
   let textObject = {
     phoneNumber: phoneNumber.phone_number,
@@ -277,6 +311,7 @@ async componentDidMount(){
           render={routerProps => <SplashPage 
           handleLogin={this.handleLogin}
           handleSignUp={this.handleSignUp}
+          serverErrorMessage={this.state.serverErrorMessage}
           {...routerProps}/>}
         />
         <Route
@@ -310,7 +345,8 @@ async componentDidMount(){
             lists={this.state.lists}
             setSelectedList={this.setSelectedList}
             callGetLists={this.callGetLists}
-            selectedList={this.state.selectedList}/>} 
+            selectedList={this.state.selectedList}
+            serverErrorMessage={this.state.serverErrorMessage}/>} 
         />
         <Route
           path="/account"

@@ -4,6 +4,7 @@ import FoodCard from './FoodCard';
 function CardContainer(props){
     return(
         <div className="card-container">
+            <p className="error-message">{props.serverErrorMessage.includes('list') && props.serverErrorMessage}</p>
             {props.foods && props.foods.map((food,index) => {
                 let gridClass = "";
                 let food_id = food.id;

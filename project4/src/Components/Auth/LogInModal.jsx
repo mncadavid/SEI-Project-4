@@ -42,6 +42,7 @@ class LogInModal extends Component{
                     <form onSubmit = {(e) => this.handleErrorHandling(e)}>
                         <h2>Log In</h2>
                         <p className="error-message">{this.state.errorMessage}</p>
+                        <p className="error-message">{this.props.serverErrorMessage}</p>
                         <p>Username:</p>
                         <input
                             autoFocus
