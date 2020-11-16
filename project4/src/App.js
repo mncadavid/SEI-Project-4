@@ -62,8 +62,15 @@ class App extends Component {
 
   handleVerify = async () => {
     const currentUser = await verifyUser();
+    console.log(currentUser);
     if(currentUser){
-      this.setState({currentUser});
+      this.setState({
+        currentUser,
+        currentChild: currentUser.children[0]
+      });
+    }
+    else{
+      this.props.history.push('/');
     }
     return true;
   }

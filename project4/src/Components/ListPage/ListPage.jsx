@@ -7,7 +7,7 @@ import ListFoodCard from './ListFoodCard';
 function ListPage(props){
     const [selectedFood, setSelectedFood] = useState(null);
     const [openEmailModal, setOpenEmailModal] = useState(false);
-    if(props.lists.length === 0){
+    if(props.lists.length === 0 && props.user !== null){
         props.callGetLists();
     }
     const handleCloseEmailModal = (e) => {
