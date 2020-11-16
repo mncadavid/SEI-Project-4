@@ -89,3 +89,9 @@ export const removeFood = async(food) => {
     const resp = await api.post('/lists/remove',food.grocerylistsfood);
     return resp.data;
 }
+
+export const sendListText = async(textObject) => {
+    const resp = await api.post('/lists/sendtext', textObject);
+    console.log(resp);
+    return resp;
+}

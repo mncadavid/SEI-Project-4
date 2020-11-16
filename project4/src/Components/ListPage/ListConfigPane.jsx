@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
-import {Input, Button}  from 'antd';
+import {Input}  from 'antd';
 import ListsContainer from './ListsContainer';
 import {Link} from 'react-router-dom';
 
 
 function ListConfigPane(props){
     const [createListName, setCreateListName] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
+  
+    const handleErrorHandling = (e) => {
+        e.preventDefault();
+        if(!createListName.trim()){
+            setErrorMessage("Name cannot be empty");
+        }
+        else{
+            setErrorMessage("List Created!");
+            props.handleCreateList(createListName);
+        }
+      }
+
+
     return(
         <div className="list-config-pane">
-            <p>List Name:</p>
-            <Input />
-            <Button>Update List Name</Button> <br />
-            <Link to="/browse"><Button>Browse for Food</Button></Link> <br />
-            <Button onClick={(e)=> {e.preventDefault(); props.setOpenEmailModal(true);}}>Email My List</Button>
+            <Link to="/browse"><button>Browse for Food</button></Link> <br />
+            <button onClick={(e) => {e.preventDefault();props.setOpenTextModal(true)}}>Text My List</button> <br />
+            <button onClick={(e)=> {e.preventDefault(); props.setOpenEmailModal(true);}}>Email My List</button>
             <p>See Another List</p>
             <ListsContainer 
                 lists={props.lists}
                 setSelectedList={props.setSelectedList}
                 selectedList={props.selectedList}/>
             <br />
+            <p>{errorMessage}</p>
             <p>New List Name:</p>
             <Input required name="name" onChange={(e) => {setCreateListName(e.target.value)}}/>
-            <Button onClick={(e) => {e.preventDefault(); props.handleCreateList(createListName)}}>Create List</Button>
+            <button onClick={(e) => {handleErrorHandling(e)}}>Create List</button>
             <br />
-            <Button onClick={(e) => {props.handleDeleteList(e)}}>Delete Selected List</Button>
+            <button onClick={(e) => {props.handleDeleteList(e)}}>Delete Selected List</button>
         </div>
     )
 }

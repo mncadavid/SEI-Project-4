@@ -3,10 +3,12 @@ import EmailListModal from './EmailListModal';
 import List from './List';
 import ListConfigPane from './ListConfigPane';
 import ListFoodCard from './ListFoodCard';
+import TextListModal from './TextListModal';
 
 function ListPage(props){
     const [selectedFood, setSelectedFood] = useState(null);
     const [openEmailModal, setOpenEmailModal] = useState(false);
+    const [openTextModal, setOpenTextModal] = useState(false);
     if(props.lists.length === 0 && props.user !== null){
         props.callGetLists();
     }
@@ -14,6 +16,11 @@ function ListPage(props){
         if(e.currentTarget===e.target){
             setOpenEmailModal(false);
           }
+    }
+    const handleCloseTextModal = (e) => {
+        if (e.currentTarget===e.target){
+            setOpenTextModal(false);
+        }
     }
         return(
             <div className="list-page">
@@ -23,7 +30,8 @@ function ListPage(props){
                     setSelectedList={props.setSelectedList}
                     handleDeleteList={props.handleDeleteList}
                     selectedList={props.selectedList}
-                    setOpenEmailModal={setOpenEmailModal}/>
+                    setOpenEmailModal={setOpenEmailModal}
+                    setOpenTextModal={setOpenTextModal}/>
                 <List selectedList={props.selectedList} setSelectedFood={setSelectedFood}/>
                 <ListFoodCard 
                     selectedFood={selectedFood} 
@@ -38,6 +46,15 @@ function ListPage(props){
                     handleCloseEmailModal={handleCloseEmailModal}
                     setOpenEmailModal={setOpenEmailModal}
                     sendGroceryListEmail={props.sendGroceryListEmail}/>}
+                {openTextModal && 
+                <TextListModal 
+                    lists = {props.lists}
+                    setSelectedList = {props.setSelectedList}
+                    selectedList={props.selectedList}
+                    handleSendText={props.handleSendText}
+                    setOpenTextModal={setOpenTextModal}
+                    handleCloseTextModal={handleCloseTextModal}
+                />}
             </div>
         )
 }

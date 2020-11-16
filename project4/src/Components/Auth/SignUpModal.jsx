@@ -5,27 +5,68 @@ class SignUpModal extends Component{
         super(props);
 
         this.state={
-            name: "",
-            username: "",
-            password: "",
-            childName: "",
-            childAge: 0
+            signUpInfo : {
+                name: "",
+                username: "",
+                password: "",
+                childName: "",
+                childAge: 0
+            },
+            errorMessage: ""
         }
     }
 
-    handleChange= (e) => {
-        const {name,value} = e.target;
+    handleChange = (e) => {
+        const {name, value}= e.target;
+        let setSignUpInfo = this.state.signUpInfo;
+        setSignUpInfo[name] = value;
         this.setState({
-            [name]: value
+            signUpInfo: setSignUpInfo
         })
+    }
+
+    handleInputErrors = (e) => {
+        e.preventDefault();
+        if(!this.state.signUpInfo.name.trim()){
+            this.setState({
+                errorMessage: "Please input a valid name"
+            })
+        }
+        else if(!this.state.signUpInfo.username.trim()){
+            this.setState({
+                errorMessage: "Please input a valid username"
+            })
+        }
+        else if(!this.state.signUpInfo.password.trim()){
+            this.setState({
+                errorMessage: "Please input a valid password"
+            })
+        }
+        else if(!this.state.signUpInfo.childName.trim()){
+            this.setState({
+                errorMessage: "Please input a valid child name"
+            })
+        }
+        else if(!this.state.signUpInfo.childAge.trim() || this.state.signUpInfo.childAge <=0 ){
+            this.setState({
+                errorMessage: "Please input a valid child age"
+            })
+        }
+        else{
+            this.setState({
+                errorMessage: ""
+            })
+            this.props.handleSignUp(this.state.signUpInfo);
+        }
     }
 
     render(){
         return(
             <div className="modal-container" onClick={(e) => {if(e.currentTarget===e.target){this.props.setOpenSignUp(false)}}}>
                 <div className="sign-up-modal">
-                    <form onSubmit = {(e) => this.props.handleSignUp(e,this.state)}>
+                    <form onSubmit = {(e) => this.handleInputErrors(e)}>
                         <h2>Sign Up</h2>
+                        <p className="error-message">{this.state.errorMessage}</p>
                         <p>Name:</p>
                         <input required
                             autoFocus

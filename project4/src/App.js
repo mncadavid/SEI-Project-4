@@ -7,7 +7,7 @@ import ListPage from './Components/ListPage/ListPage';
 import BrowsePage from './Components/BrowsePage/BrowsePage';
 import AccountPage from './Components/AccountPage';
 import { loginUser, registerUser, verifyUser, getFoodData, addExposure, getLastExposure } from './services/api_helper';
-import {getAllFood, addFood, getLists,createList, addFoodToList, deleteList,removeFood} from './services/api_helper';
+import {getAllFood, addFood, getLists,createList, addFoodToList, deleteList,removeFood, sendListText} from './services/api_helper';
 import { Component } from 'react';
 import {Route} from 'react-router-dom';
 import emailjs, {init} from 'emailjs-com';
@@ -29,8 +29,7 @@ class App extends Component {
       selectedList: []
     }
   }
-  handleSignUp = async(e,registerData) => {
-    e.preventDefault();
+  handleSignUp = async(registerData) => {
     const response = await registerUser(registerData);
     let currentUser = response.user;
     let currentChild = response.child;
@@ -41,8 +40,7 @@ class App extends Component {
     this.props.history.push('/browse');
 
   }
-  handleLogin = async (e,loginData) => {
-    e.preventDefault();
+  handleLogin = async (loginData) => {
     const resp = await loginUser(loginData);
     let currentUser = {
       name: resp.name,
@@ -63,7 +61,6 @@ class App extends Component {
 
   handleVerify = async () => {
     const currentUser = await verifyUser();
-    console.log(currentUser);
     if(currentUser){
       this.setState({
         currentUser,
@@ -154,8 +151,7 @@ callGetAllFood = async () => {
   }
   return foods.data
 }
-handleAddFood = async (e,newFood) => {
-  e.preventDefault();
+handleAddFood = async (newFood) => {
   const allFoodsPlusNew = await addFood(newFood);
   if(allFoodsPlusNew){
       this.setState({
@@ -220,8 +216,10 @@ sendGroceryListEmail = (e,email) => {
     list_items+= `<li>${category}<ul>`;
       this.state.selectedList.food.filter((food => food.category===category)).map(food => {
         list_items+=`<li>${food.name}</li>`;
+        return true;
       })
     list_items+='</ul></li>'
+    return true;
       })
   list_items+='</ul>';
 
@@ -238,6 +236,21 @@ sendGroceryListEmail = (e,email) => {
   .catch(err => {
     console.log('Failed',err);
   })
+}
+
+handleSendText = async(e,phoneNumber) => {
+  e.preventDefault();
+  let message = `\nYour ${this.state.selectedList.name} List from Picky Preventer: \n`;
+  this.state.selectedList.food.map(food => {
+    message += food.name;
+    message += '\n';
+  })
+  let textObject = {
+    phoneNumber: phoneNumber.phone_number,
+    message: message
+  }
+  const resp = await sendListText(textObject);
+
 }
 
 async componentDidMount(){
@@ -279,7 +292,8 @@ async componentDidMount(){
           handleRemoveFood={this.handleRemoveFood}
           sendGroceryListEmail={this.sendGroceryListEmail}
           callGetLists={this.callGetLists}
-          lastExposureDates={this.state.lastExposureDates}/>} 
+          lastExposureDates={this.state.lastExposureDates}
+          handleSendText={this.handleSendText}/>} 
         />
         <Route 
           path="/browse"

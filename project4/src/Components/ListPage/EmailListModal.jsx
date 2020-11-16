@@ -20,7 +20,7 @@ function EmailListModal(props){
                 <input required 
                     autoFocus 
                     name="email"
-                    type="text"
+                    type="email"
                     onChange={(e)=>{updateEmail(e)}}>
                 </input>
                 <button onClick={(e)=>{props.sendGroceryListEmail(e,email);props.setOpenEmailModal(false);}}>Send List</button>

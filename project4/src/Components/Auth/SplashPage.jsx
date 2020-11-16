@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {Button} from 'antd';
 import LogInModal from './LogInModal';
 import SignUpModal from './SignUpModal';
 
@@ -11,21 +10,19 @@ function SplashPage(props){
             <h1>Picky Preventer</h1>
             <img className="splash-image" src="./food-clipart.png" alt="Logo"/>
             <div>
-                <Button 
-                    type="primary" 
+                <button 
                     size="large" 
                     className="auth-button"
                     onClick={(e) => {
                         e.preventDefault();
                         setOpenLogin(true);
-                    }}>Log In</Button>
-                <Button 
-                    type="primary"
+                    }}>Log In</button>
+                <button
                     className="auth-button"
                     onClick={(e) => {
                         e.preventDefault();
                         setOpenSignUp(true);
-                    }}>Sign Up</Button>
+                    }}>Sign Up</button>
             </div>
             {openLogin && <LogInModal handleLogin={props.handleLogin} setOpenLogin={setOpenLogin}/>}
             {openSignUp && <SignUpModal handleSignUp={props.handleSignUp} setOpenSignUp={setOpenSignUp}/>}

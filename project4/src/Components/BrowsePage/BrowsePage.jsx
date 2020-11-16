@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Input} from 'antd';
 import CardContainer from './CardContainer';
 import AddFood from './AddFood';
 import FilterPane from './FilterPane';
@@ -49,6 +48,13 @@ class BrowsePage extends Component{
             foods: allFood
         })
     }
+    componentDidUpdate(){
+        if(this.state.foods !== this.props.allFood){
+            this.setState({
+                foods: this.props.allFood
+            })
+        }
+    }
     render(){
         return(
             <div className="browse-page">
@@ -60,10 +66,6 @@ class BrowsePage extends Component{
                     handleAddToList={this.props.handleAddToList}
                     selectedFood={this.state.selectedFood}
                     selectedList={this.props.selectedList}/>}
-                {/* <div className="search">
-                    <Input/>
-                    <button>Search</button>
-                </div> */}
                 <div className="browse-lower">
                     <FilterPane filterFoods={this.filterFoods}/>
                     <CardContainer 

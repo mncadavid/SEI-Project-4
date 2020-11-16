@@ -3,25 +3,45 @@ import React, {Component} from 'react';
 class LogInModal extends Component{
     constructor(props){
         super(props);
-        this.state={
-            username: "",
-            password: ""
+        this.state= {
+            logInInfo: {
+                username: "",
+                password: ""
+            },
+            errorMessage: ""
         }
     }
-
-    handleChange= (e) => {
-        const {name,value} = e.target;
+    handleChange = (e) => {
+        const {name, value}= e.target;
+        let setLogInInfo = this.state.logInInfo;
+        setLogInInfo[name] = value;
         this.setState({
-            [name]: value
+            logInInfo: setLogInInfo
         })
+    }
+
+    handleErrorHandling = (e) => {
+        e.preventDefault();
+        if(!this.state.logInInfo.username.trim() || !this.state.logInInfo.password.trim()){
+            this.setState({
+                errorMessage: "Username and/or password cannot be empty"
+            })
+        }
+        else{
+            this.setState({
+                errorMessage: ""
+            })
+            this.props.handleLogin(this.state.logInInfo);
+        }
     }
 
     render(){
         return(
             <div className="modal-container" onClick={(e) => {if(e.currentTarget===e.target){this.props.setOpenLogin(false)}}}>
                 <div className="login-modal">
-                    <form onSubmit = {(e) => this.props.handleLogin(e,this.state)}>
+                    <form onSubmit = {(e) => this.handleErrorHandling(e)}>
                         <h2>Log In</h2>
+                        <p className="error-message">{this.state.errorMessage}</p>
                         <p>Username:</p>
                         <input
                             autoFocus
