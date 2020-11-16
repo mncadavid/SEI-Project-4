@@ -13,6 +13,7 @@ import {Route} from 'react-router-dom';
 import emailjs, {init} from 'emailjs-com';
 import {categories} from './categories';
 
+require('dotenv').config();
 
 class App extends Component {
   constructor(props){
@@ -262,7 +263,8 @@ sendGroceryListEmail = (e,email) => {
     list_items: list_items,
     to_email: email.email
   }
-  emailjs.send('service_eilq6oq','template_ul2h0hv', templateParams)
+  
+  emailjs.send(process.env.REACT_APP_EMAIL_SERVICE_ID,process.env.REACT_APP_EMAIL_TEMPLATE_ID, templateParams)
   .then(response => {
     console.log('Success!', response.status, response.text);
   })
