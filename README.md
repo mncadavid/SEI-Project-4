@@ -28,24 +28,24 @@ Picky Preventer serves as a food tracker for parents with babies and young child
 
 
 ## MVP
-[x] Clean, easy-to-navigate, functional site
-[x] Successfully integrated front and back ends
-[x] User can browse foods
-[x] User can add foods to grocery list
-[x] User can have multiple grocery lists
-[x] User can expand food to see child's exposures
-[x] Full CRUD on grocery lists
-[x] User can create new foods
-[x] User authentication
-[x] Email the grocery list to the user - New tech
+- [x] Clean, easy-to-navigate, functional site
+- [x] Successfully integrated front and back ends
+- [x] User can browse foods
+- [x] User can add foods to grocery list
+- [x] User can have multiple grocery lists
+- [x] User can expand food to see child's exposures
+- [x] Full CRUD on grocery lists
+- [x] User can create new foods
+- [x] User authentication
+- [x] Email the grocery list to the user - New tech
 
 ## Silver
-[x] Password Hashing
-[ ] User can upload photos and videos of child eating the food (in exposures) - Amazon S3 or Amazon CloudFront
-[ ] Styling using REACT library
-[ ] Modal warnings on certain foods based on child's age (e.g., "Popcorn is not recommended for children under 4 years of age.")
+- [x] Password Hashing
+- [ ] User can upload photos and videos of child eating the food (in exposures) - Amazon S3 or Amazon CloudFront
+- [ ] Styling using REACT library
+- [ ] Modal warnings on certain foods based on child's age (e.g., "Popcorn is not recommended for children under 4 years of age.")
 
 ## Gold
-[ ] User's can add multiple children and track by each child
-[x] User can text grocery list - Twilio and/or Vonage (previously Nexmo)
-[ ] Suggestions displaying foods that the child has never tried or the most time has passed since they tried the food
+- [ ] User's can add multiple children and track by each child
+- [x] User can text grocery list - Twilio and/or Vonage (previously Nexmo)
+- [ ] Suggestions displaying foods that the child has never tried or the most time has passed since they tried the food
