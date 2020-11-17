@@ -5,8 +5,13 @@ const { TextArea } = Input;
 class AddExposureForm extends Component{
     constructor(props){
         super(props);
+        let today = new Date();
+        let month = today.getUTCMonth() + 1;
+        let day = today.getUTCDate();
+        let year = today.getUTCFullYear();
+        let todayDate = year + "-" + month + "-" + day;
         this.state = {
-            date: null,
+            date: todayDate,
             reaction: "",
             food_id: this.props.food_id,
             user_id: this.props.currentUser.id,

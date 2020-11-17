@@ -12,7 +12,12 @@ function AddToListModal(props){
                 <h3>Select list:</h3>
                 <ListsContainer lists={props.lists} setSelectedList={props.setSelectedList} selectedList={props.selectedList}/>
                 <br/>
-                <button onClick={(e)=> {props.handleAddToList(e,props.selectedFood);props.closeAddToListModal();}}>Add to List</button>
+                <button 
+                    disabled = {props.selectedList.length === 0}
+                    onClick={(e)=> {
+                        props.handleAddToList(e,props.selectedFood);
+                        props.closeAddToListModal();
+                    }}>Add to List</button>
             </div>
         </div>
     )

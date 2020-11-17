@@ -6,7 +6,8 @@ function List(props){
         <div className="list-placeholder">
         {props.selectedList.length !== 0 &&
             <div className="list">
-                <h2>{props.selectedList.name}</h2>
+                <h2 className="list-title">{props.selectedList.name}</h2>
+                <p className="list-title"><i> - (Click food name to see more)</i></p>
                 <ul>
                     {categories.map((category,index) => {
                         return <li key={index}>{category}

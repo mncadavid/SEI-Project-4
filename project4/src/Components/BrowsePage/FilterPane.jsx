@@ -1,5 +1,6 @@
 import React from 'react';
 import {categories} from '../../categories';
+import {Link} from 'react-router-dom';
 
 function FilterPane(props){
     return(
@@ -11,6 +12,8 @@ function FilterPane(props){
                         return <option key={index} value={category}>{category}</option>
                       })}
                 </select>
+            <br/>
+            <Link to="/lists" style={{textDecoration:'none',color:'black'}}><button>My Grocery Lists</button></Link>
         </div>
     )
 }

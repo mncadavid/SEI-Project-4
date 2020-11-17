@@ -60,7 +60,7 @@ class BrowsePage extends Component{
             <div className="browse-page">
                 {this.state.openAddToListModal && <AddToListModal 
                     lists={this.props.lists}
-                    openAddToListModal={this.state.openAddToListModal}
+                    // openAddToListModal={this.state.openAddToListModal}
                     setSelectedList={this.props.setSelectedList}
                     closeAddToListModal={this.closeAddToListModal}
                     handleAddToList={this.props.handleAddToList}
