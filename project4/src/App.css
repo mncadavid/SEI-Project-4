@@ -73,6 +73,9 @@
     border-radius: 10px;
     margin: 20px;
 }
+.exposure-date{
+    margin-top: 0;
+}
 .modal-container{
     z-index: 1;
     position: absolute;
@@ -303,4 +306,37 @@
 }
 .error-message{
     color: red;
+}
+.about-page{
+    height: 100%;
+    padding: 20px 50px;
+}
+.about-title{
+   text-align: center;
+}
+.about-lower{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+.about-list{
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    line-height: 200%;
+}
+.luke-avocado{
+    height: 50vh;
+    margin: 0 auto;
+    grid-column: 2 / span 1;
+    grid-row: 1 / 1;
+}
+.luke-avocado-with-caption{
+    grid-row: 1 /1;
+    grid-column: 2 / span 1;
+    text-align: center;
+    margin: 0 auto;
+}
+.source{
+    font-size: small;
+    margin: 5px;
 }

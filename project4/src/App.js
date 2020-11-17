@@ -12,6 +12,7 @@ import { Component } from 'react';
 import {Route} from 'react-router-dom';
 import emailjs, {init} from 'emailjs-com';
 import {categories} from './categories';
+import AboutPage from './Components/AboutPage';
 
 require('dotenv').config();
 
@@ -299,7 +300,7 @@ async componentDidMount(){
     return (
       <div className="App body">
         <Route
-          path={["/browse","/account","/lists"]} 
+          path={["/browse","/account","/lists","/about"]} 
           render={routerProps => <Header handleLogout={this.handleLogout}/>}
         />
         {this.state.openFood && 
@@ -359,7 +360,13 @@ async componentDidMount(){
           />} 
         />
         <Route
-          path={["/browse","/account","/lists"]} 
+          path="/about"
+          render={routerProps => <AboutPage
+          {...routerProps}
+          />}
+        />
+        <Route
+          path={["/browse","/account","/lists","/about"]} 
           render={routerProps => <Footer/>}
         />
       </div>

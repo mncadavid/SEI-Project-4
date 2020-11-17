@@ -8,7 +8,8 @@ function ListFoodCard(props){
             {props.selectedFood && 
                 <div className="list-food-card">
                     <h3>{props.selectedFood.name}</h3>
-                    <p>{props.lastExposureDates[props.selectedFood.grocerylistsfood.food_id]}</p>
+                    <p>Last Exposure Date:</p>
+                    <p className="exposure-date">{props.lastExposureDates[props.selectedFood.grocerylistsfood.food_id]}</p>
                     <Button
                     onClick={(e)=>{e.preventDefault();props.setSelectedFood(null);props.handleRemoveFood(props.selectedFood)}}>Remove from List</Button>
                 </div>
