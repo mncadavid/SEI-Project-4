@@ -134,7 +134,6 @@ class App extends Component {
   handleAddToList = async (e,food) => {
     e.preventDefault();
     const lists = await addFoodToList(this.state.selectedList.id,food.id,this.state.currentUser.id);
-    console.log(lists);
     if((typeof lists) === 'string'){
       this.setState({
         serverErrorMessage: lists

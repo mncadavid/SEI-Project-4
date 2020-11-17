@@ -14,8 +14,6 @@ function TextListModal(props){
     const errorHandling = (e, number) => {
         e.preventDefault();
         if(number.phone_number.length !== 11 || number.phone_number.substring(0,1) !== "1"){
-            console.log(number.phone_number.length)
-            console.log(number.phone_number.substring(0,1))
             setErrorMessage("Please input a valid number");
         }
         else{
