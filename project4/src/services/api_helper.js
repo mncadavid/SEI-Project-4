@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: "http://localhost:9000"
-    // baseURL: "https://boiling-earth-32454.herokuapp.com/"
+    // baseURL: "http://localhost:9000"
+    baseURL: "https://boiling-earth-32454.herokuapp.com/"
 })
 
 //Sends the data to register the user, sets the authToken, and returns the data
