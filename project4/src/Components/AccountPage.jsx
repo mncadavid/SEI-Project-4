@@ -10,9 +10,9 @@ function AccountPage(props){
                     <h2>Hello, {props.user.name}!</h2>
                     <h3>Child: {props.child.name}</h3>
                     <h4>Age: {props.child.age}</h4>
-                    <Link to="/lists" style={{textDecoration:'none',color:'black'}}>My Grocery Lists</Link>
+                    <Link to="/lists" style={{textDecoration:'none',color:'black'}}><button>My Grocery Lists</button></Link>
                     <br /><br />
-                    <Link to="/browse" style={{textDecoration:'none',color:'black'}}>Back to Browse</Link>
+                    <Link to="/browse" style={{textDecoration:'none',color:'black'}}><button>Back to Browse</button></Link>
                 </div>
             }
         </div>

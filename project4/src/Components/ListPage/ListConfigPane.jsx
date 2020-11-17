@@ -22,7 +22,7 @@ function ListConfigPane(props){
 
     return(
         <div className="list-config-pane">
-            <Link to="/browse"><button>Browse for Food</button></Link> <br />
+            <Link to="/browse" style={{textDecoration:'none',color:'black',display:'inline-block'}}><button>Browse for Food</button></Link> <br />
             <button onClick={(e) => {e.preventDefault();props.setOpenTextModal(true)}}>Text My List</button> <br />
             <button onClick={(e)=> {e.preventDefault(); props.setOpenEmailModal(true);}}>Email My List</button>
             <p>See Another List</p>
