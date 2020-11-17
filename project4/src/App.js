@@ -290,8 +290,7 @@ class App extends Component {
   }
   //Formats the string to be sent at the message and then uses the api helper to send the 
   //text request to the server
-  handleSendText = async(e,phoneNumber) => {
-    e.preventDefault();
+  handleSendText = async(phoneNumber) => {
     let message = `\nYour ${this.state.selectedList.name} List from Picky Preventer: \n`;
     this.state.selectedList.food.map(food => {
       message += food.name;
