@@ -29,7 +29,7 @@
     background-color: #FFD97D;
     height: 5vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -339,4 +339,9 @@
 .source{
     font-size: small;
     margin: 5px;
+    color: black;
+}
+.footer a{
+    text-decoration: none;
+    color: black;
 }

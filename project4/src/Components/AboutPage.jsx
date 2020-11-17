@@ -32,8 +32,9 @@ function AboutPage(){
             </div>
             <br/>
             <a className="source" href="https://www.healthy-height.com/blogs/growth-nutrition-guide/getting-kids-to-try-new-foods#:~:text=Put%20simply%2C%20children%20like%20what,Schwartz%20C.%2C%202019)."
-            target="_blank">*Healthy Height</a>
-            <a className="source" href="https://pubmed.ncbi.nlm.nih.gov/17635306/" target="_blank">*The importance of exposure for healthy eating in childhood</a>
+                target="_blank" rel="noreferrer">*Healthy Height</a>
+            <a className="source" href="https://pubmed.ncbi.nlm.nih.gov/17635306/" 
+                target="_blank" rel="noreferrer">*The importance of exposure for healthy eating in childhood</a>
         </div>
     )
 }
