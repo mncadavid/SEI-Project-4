@@ -37,7 +37,7 @@ Picky Preventer serves as a food tracker for parents with babies and young child
 - [x] Full CRUD on grocery lists
 - [x] User can create new foods
 - [x] User authentication
-- [x] Email the grocery list to the user - New tech
+- [x] Email the grocery list to the user - EmailJS
 
 ## Silver
 - [x] Password Hashing
@@ -49,3 +49,13 @@ Picky Preventer serves as a food tracker for parents with babies and young child
 - [ ] User's can add multiple children and track by each child
 - [x] User can text grocery list - Twilio and/or Vonage (previously Nexmo)
 - [ ] Suggestions displaying foods that the child has never tried or the most time has passed since they tried the food
+
+## Technology Used
+* NodeJS
+* Express
+* React
+* Vonage (previously Nexmo) SMS API
+* Twilio SMS API
+* EmailJS
+* Bcrypt
+* JSON Web Tokens
