@@ -5,6 +5,8 @@ const { TextArea } = Input;
 class AddExposureForm extends Component{
     constructor(props){
         super(props);
+        //This creates today's date and formats a string to the format I need to default the date
+        //input selector
         let today = new Date();
         let month = today.getUTCMonth() + 1;
         let day = today.getUTCDate();
@@ -18,7 +20,7 @@ class AddExposureForm extends Component{
             child_id: this.props.currentUser.child_id
         }
     }
-
+    //updates the state as the user changes the inputs
     handleChange= (e) => {
         const {name,value} = e.target;
         this.setState({

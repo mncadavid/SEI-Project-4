@@ -3,6 +3,7 @@ import ListsContainer from './ListsContainer';
 
 function EmailListModal(props){
     const [email, setEmail] = useState(null);
+    //Updates the email hook as the user types in the input box
     const updateEmail = (e) => {
         setEmail({
             [e.target.name]: e.target.value

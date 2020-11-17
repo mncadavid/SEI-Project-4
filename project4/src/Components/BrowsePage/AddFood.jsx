@@ -14,7 +14,7 @@ class AddFood extends Component{
         errorMessage: ""
       }
     }
-
+    //Updates the state as the user types in the inputs
     handleChange = (e) => {
       const {name, value}= e.target;
       let setNewFoodInfo = this.state.newFoodInfo;
@@ -22,8 +22,8 @@ class AddFood extends Component{
       this.setState({
           newFoodInfo: setNewFoodInfo
       })
-  }
-
+    }
+    //Does not allow an empty food otherwise tries to create the new food
     handleErrorHandling = (e) => {
       e.preventDefault();
       if(!this.state.newFoodInfo.name.trim()){

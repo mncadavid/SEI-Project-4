@@ -3,6 +3,7 @@ import LogInModal from './LogInModal';
 import SignUpModal from './SignUpModal';
 
 function SplashPage(props){
+    //These variables control whether the login or signup modals are open or not.
     const [openLogin, setOpenLogin] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
     return(

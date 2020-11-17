@@ -3,6 +3,7 @@ import ListsContainer from './ListsContainer';
 
 function TextListModal(props){
     const [phoneNumber, setPhoneNumber] = useState(null);
+    //Updates the phone number as the user types in the input box
     const updatePhoneNumber = (e) => {
         setPhoneNumber({
             [e.target.name]: e.target.value
@@ -17,6 +18,7 @@ function TextListModal(props){
                 setSelectedList={props.setSelectedList}
                 selectedList={props.selectedList}/>
                 <p>Enter the phone number:</p>
+                <p><i>Must be in the format 15555555555</i></p>
                 <input required 
                     autoFocus 
                     name="phone_number"

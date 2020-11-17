@@ -15,6 +15,7 @@ class BrowsePage extends Component{
             foods: this.props.allFood
         }
     }
+    //Opens the add to list modal and sets the selected food
     handleOpenAddToListModal = (e,food) => {
         e.preventDefault();
         this.props.callGetLists();
@@ -23,11 +24,13 @@ class BrowsePage extends Component{
             selectedFood: food
         })
     }
+    //Closes the add to list modal
     closeAddToListModal = () => {
         this.setState({
             openAddToListModal: false
         })
     }
+    //Filters the foods based on the filter drop down
     filterFoods = (filter) => {
         if(filter === "All"){
             this.setState({
@@ -36,20 +39,21 @@ class BrowsePage extends Component{
         }
         else{
             let filteredFoods = this.props.allFood.filter(food => food.category === filter);
-            console.log(filteredFoods);
             this.setState({
                 foods: filteredFoods,
                 categoryFilter: filter
             })
         }
     }
-
+    //After the page mounts, this uses the api helper to get all of the foods in the database
     componentDidMount = async () => {
         let allFood = await this.props.callGetAllFood();
         this.setState({
             foods: allFood
         })
     }
+    //When the page updates, if the filter is set to all and the list of all foods is not complete
+    //(i.e., a new food has been added) update the list of all foods
     componentDidUpdate(){
         if(this.state.foods !== this.props.allFood && this.state.categoryFilter === "All"){
             this.setState({
@@ -62,7 +66,6 @@ class BrowsePage extends Component{
             <div className="browse-page">
                 {this.state.openAddToListModal && <AddToListModal 
                     lists={this.props.lists}
-                    // openAddToListModal={this.state.openAddToListModal}
                     setSelectedList={this.props.setSelectedList}
                     closeAddToListModal={this.closeAddToListModal}
                     handleAddToList={this.props.handleAddToList}

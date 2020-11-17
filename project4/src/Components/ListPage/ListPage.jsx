@@ -9,14 +9,18 @@ function ListPage(props){
     const [selectedFood, setSelectedFood] = useState(null);
     const [openEmailModal, setOpenEmailModal] = useState(false);
     const [openTextModal, setOpenTextModal] = useState(false);
+    
+    //if there are no lists and there is a user. Get the lists.
     if(props.lists.length === 0 && props.user !== null){
         props.callGetLists();
     }
+    //If the user clicks outside of the email modal it closes
     const handleCloseEmailModal = (e) => {
         if(e.currentTarget===e.target){
             setOpenEmailModal(false);
           }
     }
+    //If the user clicks outside of the text modal it closes
     const handleCloseTextModal = (e) => {
         if (e.currentTarget===e.target){
             setOpenTextModal(false);

@@ -32,6 +32,9 @@ class App extends Component {
       serverErrorMessage: ""
     }
   }
+  // Calls the API helper for registering a user and then sets the current user
+  // and current child based on what was returned. Sets the error message if a user
+  // was not returned (i.e., there was an error registering).
   handleSignUp = async(registerData) => {
     const response = await registerUser(registerData);
     if(!response.user){
@@ -50,6 +53,9 @@ class App extends Component {
       this.props.history.push('/browse');
     }
   }
+  // Calls the API helper for logging in a user and then sets the current user
+  // and current child based on what was returned. Sets the error message if a user
+  // was not returned (i.e., there was an error logging in).
   handleLogin = async (loginData) => {
     const resp = await loginUser(loginData);
     if(!resp.name){
@@ -76,6 +82,9 @@ class App extends Component {
       this.props.history.push('/browse');
     }
   }
+  // Calls the API helper for verifying a user and then sets the current user
+  // and current child based on what was returned. If the user could not be verified it redirects
+  // to the splash page.
 
   handleVerify = async () => {
     const currentUser = await verifyUser();
@@ -93,15 +102,16 @@ class App extends Component {
     }
     return true;
   }
-
+  //Removes the authToken, removes currentUser, and redirects user to splash page. 
   handleLogout = () => {
     localStorage.removeItem('authToken');
     this.setState({
-      currentUser: null
+      currentUser: null,
+      currentChild: null
     })
     this.props.history.push('/');
   }
-
+  //Gets the food data for the food that should be displayed in the modal and opens the modal
   handleOpenFood = async (e,food_id,child_id) => {
     e.preventDefault();
     const foodData = await getFoodData(food_id,child_id);
@@ -110,6 +120,7 @@ class App extends Component {
       foodModalData: foodData.data
     })
   }
+  //Closes the food exposure modal if user clicks outside of the modal
   handleCloseFood = (e) => {
     if(e.currentTarget===e.target){
       this.setState({
@@ -118,6 +129,8 @@ class App extends Component {
       })
     }
   }
+  //Calls the api helper to add the food to the selected list. Sets the error message if there
+  // was an error adding the food to the list.  Updates the list and empties selected list.
   handleAddToList = async (e,food) => {
     e.preventDefault();
     const lists = await addFoodToList(this.state.selectedList.id,food.id,this.state.currentUser.id);
@@ -135,6 +148,7 @@ class App extends Component {
       })
     }
   }
+  //Calls the api helper to add the exposure to the food for the specific child
   handleAddExposure = async (e,exposure) => {
     e.preventDefault();
     const exposureData = await addExposure(exposure);
@@ -143,7 +157,9 @@ class App extends Component {
     });
     this.callGetLastExposure(exposure.food_id);
   }
-
+  //Calls the api helper to get the most recent exposure for that food and child
+  //Then takes the response and formats the string to Month. Day that I want displayed on the
+  //card.  If the food has not been tried before, it displays new food.
   callGetLastExposure = async (food_id) => {
     let searchObject = {
         food_id: food_id,
@@ -169,131 +185,131 @@ class App extends Component {
           lastExposureDates: lastExposureDatesCopy
       })
     }
-}
-
-callGetAllFood = async () => {
-  const foods = await getAllFood();
-  if(foods){
-      this.setState({
-          allFood: foods.data
-      })
   }
-  return foods.data
-}
-handleAddFood = async (newFood) => {
-  const allFoodsPlusNew = await addFood(newFood);
-  if(allFoodsPlusNew && (typeof allFoodsPlusNew.data) === "string"){
+  //Calls the api helper to get all of the food in the database
+  callGetAllFood = async () => {
+    const foods = await getAllFood();
+    if(foods){
+        this.setState({
+            allFood: foods.data
+        })
+    }
+    return foods.data
+  }
+  //Calls the api helper to create a new food. Updates the all food state value
+  // or sets the error message if it was unable to add the food
+  handleAddFood = async (newFood) => {
+    const allFoodsPlusNew = await addFood(newFood);
+    if(allFoodsPlusNew && (typeof allFoodsPlusNew.data) === "string"){
+      this.setState({
+        serverErrorMessage: allFoodsPlusNew.data
+      })
+    }
+    else if(allFoodsPlusNew){
+        this.setState({
+            allFood: allFoodsPlusNew.data,
+            serverErrorMessage: ""
+        })
+    }
+  }
+  //Uses the Api helper to get all of the lists for the current user
+  callGetLists = async (user_id) => {
+    const lists = await getLists(this.state.currentUser.id);
     this.setState({
-      serverErrorMessage: allFoodsPlusNew.data
+      lists
     })
   }
-  else if(allFoodsPlusNew){
-      this.setState({
-          allFood: allFoodsPlusNew.data,
-          serverErrorMessage: ""
-      })
+  //Uses the api helper to create a new list for the current user
+  handleCreateList = async(listName) => {
+    const lists = await createList(listName,this.state.currentUser.id);
+    this.setState({
+      lists
+    })
   }
-}
-callGetLists = async (user_id) => {
-  const lists = await getLists(this.state.currentUser.id);
-  this.setState({
-    lists
-  })
-}
-handleCreateList = async(listName) => {
-  const lists = await createList(listName,this.state.currentUser.id);
-  this.setState({
-    lists
-  })
-}
-handleDeleteList = async(e) => {
-  e.preventDefault();
-  let listInfo = this.state.selectedList;
-  listInfo.user_id = this.state.currentUser.id;
-  const lists = await deleteList(listInfo);
-  this.setState({
-    lists: lists,
-    selectedList: []
-  })
-}
-setSelectedList = (list_id) => {
-  let list = this.state.lists.filter(x=>x.id===list_id);
-  this.setState({
-      selectedList: list[0]
-  })
-}
-handleRemoveFood = async(food) => {
-  const lists = await removeFood(food);
-  let selectedListId = this.state.selectedList.id;
-  this.setState({
-    lists
-  })
-  this.setSelectedList(selectedListId);
-}
-sendGroceryListEmail = (e,email) => {
-  e.preventDefault();
-  // let list_items = "";
-  // categories.map(category => {
-  //   list_items += category;
-  //   list_items += '\n';
-  //   this.state.selectedList.food.filter((food => food.category===category)).map(food => {
-  //     list_items+= '\t';
-  //     list_items+= food.name;
-  //     list_items+= '\n';
-  //   })
-  // })
-
-  let list_items = "";
-
-  list_items+= `<h2>${this.state.selectedList.name}</h2>`;
-  list_items+= `<ul>`;
-  categories.map(category => {
-    list_items+= `<li>${category}<ul>`;
-      this.state.selectedList.food.filter((food => food.category===category)).map(food => {
-        list_items+=`<li>${food.name}</li>`;
-        return true;
-      })
-    list_items+='</ul></li>'
-    return true;
-      })
-  list_items+='</ul>';
-
-  const templateParams = {
-    to_name: "Juan",
-    list_name: this.state.selectedList.name,
-    list_items: list_items,
-    to_email: email.email
+  //Uses the api helper to delete a list for the current user
+  handleDeleteList = async(e) => {
+    e.preventDefault();
+    let listInfo = this.state.selectedList;
+    listInfo.user_id = this.state.currentUser.id;
+    const lists = await deleteList(listInfo);
+    this.setState({
+      lists: lists,
+      selectedList: []
+    })
   }
-  
-  emailjs.send(process.env.REACT_APP_EMAIL_SERVICE_ID,process.env.REACT_APP_EMAIL_TEMPLATE_ID, templateParams)
-  .then(response => {
-    console.log('Success!', response.status, response.text);
-  })
-  .catch(err => {
-    console.log('Failed',err);
-  })
-}
-
-handleSendText = async(e,phoneNumber) => {
-  e.preventDefault();
-  let message = `\nYour ${this.state.selectedList.name} List from Picky Preventer: \n`;
-  this.state.selectedList.food.map(food => {
-    message += food.name;
-    message += '\n';
-    return true;
-  })
-  let textObject = {
-    phoneNumber: phoneNumber.phone_number,
-    message: message
+  //Sets the selected list based on which list was clicked on
+  setSelectedList = (list_id) => {
+    let list = this.state.lists.filter(x=>x.id===list_id);
+    this.setState({
+        selectedList: list[0]
+    })
   }
-  const resp = await sendListText(textObject);
+  //Uses the api helper to remove the food from the list
+  handleRemoveFood = async(food) => {
+    const lists = await removeFood(food);
+    let selectedListId = this.state.selectedList.id;
+    this.setState({
+      lists
+    })
+    this.setSelectedList(selectedListId);
+  }
 
-}
+  //Formats the message to be sent to EmailJS, then creates the object containing the message information, and
+  //finall calls the send method of emailjs to send the email.
+  sendGroceryListEmail = (e,email) => {
+    e.preventDefault();
+    let list_items = "";
 
-async componentDidMount(){
-  await this.handleVerify();
-  init("user_LxVURALYlGpU0sNoWHfw9");
-}
+    list_items+= `<h2>${this.state.selectedList.name}</h2>`;
+    list_items+= `<ul>`;
+    categories.map(category => {
+      list_items+= `<li>${category}<ul>`;
+        this.state.selectedList.food.filter((food => food.category===category)).map(food => {
+          list_items+=`<li>${food.name}</li>`;
+          return true;
+        })
+      list_items+='</ul></li>'
+      return true;
+        })
+    list_items+='</ul>';
+
+    const templateParams = {
+      to_name: "Juan",
+      list_name: this.state.selectedList.name,
+      list_items: list_items,
+      to_email: email.email
+    }
+    
+    emailjs.send(process.env.REACT_APP_EMAIL_SERVICE_ID,process.env.REACT_APP_EMAIL_TEMPLATE_ID, templateParams)
+    .then(response => {
+      console.log('Success!', response.status, response.text);
+    })
+    .catch(err => {
+      console.log('Failed',err);
+    })
+  }
+  //Formats the string to be sent at the message and then uses the api helper to send the 
+  //text request to the server
+  handleSendText = async(e,phoneNumber) => {
+    e.preventDefault();
+    let message = `\nYour ${this.state.selectedList.name} List from Picky Preventer: \n`;
+    this.state.selectedList.food.map(food => {
+      message += food.name;
+      message += '\n';
+      return true;
+    })
+    let textObject = {
+      phoneNumber: phoneNumber.phone_number,
+      message: message
+    }
+    const resp = await sendListText(textObject);
+  }
+
+  //Once the app is loaded, verify the user. This allows us to refresh the page and still be logged in.
+  async componentDidMount(){
+    await this.handleVerify();
+    init("user_LxVURALYlGpU0sNoWHfw9");
+  }
 
 
   render(){

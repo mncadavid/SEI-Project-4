@@ -15,7 +15,7 @@ class SignUpModal extends Component{
             errorMessage: ""
         }
     }
-
+    //Updates the state as the user types in the inputs
     handleChange = (e) => {
         const {name, value}= e.target;
         let setSignUpInfo = this.state.signUpInfo;
@@ -24,7 +24,7 @@ class SignUpModal extends Component{
             signUpInfo: setSignUpInfo
         })
     }
-
+    //Does not allow inputs to be empty. Otherwise tries to sign up the user.
     handleInputErrors = (e) => {
         e.preventDefault();
         if(!this.state.signUpInfo.name.trim()){

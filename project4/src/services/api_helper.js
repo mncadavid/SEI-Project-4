@@ -5,13 +5,14 @@ const api = axios.create({
     // baseURL: "https://boiling-earth-32454.herokuapp.com/"
 })
 
+//Sends the data to register the user, sets the authToken, and returns the data
 export const registerUser = async(registerData) => {
     const resp = await api.post('/auth/signup', registerData);
     localStorage.setItem('authToken', resp.data.token);
     api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`;
     return resp.data;
 }
-
+//
 export const loginUser = async(loginData) => {
     const resp = await api.post('/auth/login', loginData);
     localStorage.setItem('authToken', resp.data.token);

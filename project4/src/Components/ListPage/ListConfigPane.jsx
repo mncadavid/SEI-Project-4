@@ -8,6 +8,7 @@ function ListConfigPane(props){
     const [createListName, setCreateListName] = useState(null);
     const [errorMessage, setErrorMessage] = useState("");
   
+    //A new list name cannot be empty, otherwise tries to create the new list for the user
     const handleErrorHandling = (e) => {
         e.preventDefault();
         if(!createListName.trim()){

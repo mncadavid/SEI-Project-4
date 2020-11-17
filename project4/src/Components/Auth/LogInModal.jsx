@@ -11,6 +11,7 @@ class LogInModal extends Component{
             errorMessage: ""
         }
     }
+    //Updates the state as the user types in the inputs
     handleChange = (e) => {
         const {name, value}= e.target;
         let setLogInInfo = this.state.logInInfo;
@@ -19,7 +20,7 @@ class LogInModal extends Component{
             logInInfo: setLogInInfo
         })
     }
-
+    //Does not allow the username or password to be empty. Otherwise tries logging in the user
     handleErrorHandling = (e) => {
         e.preventDefault();
         if(!this.state.logInInfo.username.trim() || !this.state.logInInfo.password.trim()){

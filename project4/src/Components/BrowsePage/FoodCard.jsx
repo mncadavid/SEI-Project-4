@@ -11,10 +11,12 @@ class FoodCard extends Component{
             food: this.props.food
         }
     }
-
+    //After the component mounts, gets the last exposure for the food with the current user
     componentDidMount(){
         this.props.currentUser && this.props.callGetLastExposure(this.props.food.id);
     }
+    //If the component updates and the user is not the same as the app level user,
+    // update the user and get the last exposure
     componentDidUpdate(){
         if(this.props.currentUser !== this.state.currentUser){
             this.setState({

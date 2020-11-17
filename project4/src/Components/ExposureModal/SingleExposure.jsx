@@ -1,6 +1,7 @@
 import React from 'react';
 
 function SingleExposure(props){
+    //Formats the exposure string to how I want it to be displayed
     const months = ['Jan.','Feb. ','Mar. ','Apr. ','May ','June ','July ','Aug. ','Sept. ','Oct. ','Nov. ','Dec. '];
     let fullDate = props.exposure.date;
     let monthIndex = fullDate.substring(5,7);
