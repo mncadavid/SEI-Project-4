@@ -36,8 +36,10 @@ class BrowsePage extends Component{
         }
         else{
             let filteredFoods = this.props.allFood.filter(food => food.category === filter);
+            console.log(filteredFoods);
             this.setState({
-                foods: filteredFoods
+                foods: filteredFoods,
+                categoryFilter: filter
             })
         }
     }
@@ -49,7 +51,7 @@ class BrowsePage extends Component{
         })
     }
     componentDidUpdate(){
-        if(this.state.foods !== this.props.allFood){
+        if(this.state.foods !== this.props.allFood && this.state.categoryFilter === "All"){
             this.setState({
                 foods: this.props.allFood
             })
