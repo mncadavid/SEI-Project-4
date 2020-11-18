@@ -273,7 +273,7 @@ class App extends Component {
     list_items+='</ul>';
 
     const templateParams = {
-      to_name: "Juan",
+      to_name: this.state.currentUser.name,
       list_name: this.state.selectedList.name,
       list_items: list_items,
       to_email: email.email
